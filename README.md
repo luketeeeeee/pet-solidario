@@ -10,4 +10,4 @@ Passos para a instalação
 
 4. Vá até o navegador e acesse 'http://localhost:5173', volte ao terminal e digite CTRL + C para parar a aplicação, volte a pasta raiz.
 
-5. Entre na pasta ```server``` e execute o camando ```npm install```, aguarde a instalação, quando concluída execute o comando ````npm start```.
+5. Entre na pasta ```server``` e execute o camando ```npm install```, aguarde a instalação, quando concluída execute o comando ```npm start```.
