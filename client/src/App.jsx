@@ -5,16 +5,9 @@ import { Home } from './pages/Home';
 function App() {
 	return (
 		<BrowserRouter>
-			<header>
-				<Link to="/">
-					<h1>Pet Solidário</h1>
-				</Link>
-			</header>
-			<main>
-				<Routes>
-					<Route path="/" element={<Home />} />
-				</Routes>
-			</main>
+			<Routes>
+				<Route path="/" element={<Home />} />
+			</Routes>
 		</BrowserRouter>
 	);
 }
