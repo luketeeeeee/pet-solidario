@@ -4,7 +4,8 @@ export function Home() {
 	return (
 		<>
 			<Header />
-			<main></main>
+			{/* essa seção main contém o fundo da página, estilos: bg-home-img bg-cover bg-no-repeat */}
+			<main className="h-[92%]"></main>
 		</>
 	);
 }

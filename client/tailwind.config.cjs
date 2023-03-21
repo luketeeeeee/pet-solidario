@@ -6,6 +6,9 @@ module.exports = {
 			colors: {
 				'button-yellow': '#FFD350',
 			},
+			backgroundImage: {
+				'home-img': "url('/src/assets/bg-home-img.png')",
+			},
 		},
 	},
 	plugins: [],
