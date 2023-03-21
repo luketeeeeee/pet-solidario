@@ -3,7 +3,7 @@ import logo from '../assets/logo.png';
 
 export function Header() {
 	return (
-		<header className="flex w-full flex-wrap justify-between bg-slate-900 px-16 py-5 text-white">
+		<header className="flex h-[10%] w-full flex-wrap justify-between bg-slate-900 px-16 py-3 text-white">
 			<div className="flex w-[15%] justify-between text-lg">
 				<Link
 					title="Logo do Pet Solidário"
@@ -23,7 +23,7 @@ export function Header() {
 				</Link>
 
 				<Link className="max-h-10 rounded-xl bg-button-yellow px-5 py-2 transition duration-500 ease-in-out hover:bg-yellow-600">
-					Cadastra-se
+					Cadastre-se
 				</Link>
 			</div>
 		</header>
