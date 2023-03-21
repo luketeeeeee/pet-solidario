@@ -3,8 +3,8 @@ import logo from '../assets/logo.png';
 
 export function Header() {
 	return (
-		<header className="flex h-[10%] w-full flex-wrap justify-between bg-slate-900 px-16 py-3 text-white">
-			<div className="flex w-[15%] justify-between text-lg">
+		<header className="flex h-[11vh] w-full flex-wrap justify-between bg-slate-900 px-16 py-4 text-white">
+			<div className="flex w-64 justify-between text-lg">
 				<Link
 					title="Logo do Pet Solidário"
 					to="/"
