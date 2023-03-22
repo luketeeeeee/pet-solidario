@@ -3,6 +3,8 @@ import * as dotenv from 'dotenv';
 import cors from 'cors';
 
 import connectDB from './mongodb/connect.js';
+import usersRoutes from './routes/users.js';
+import authRoutes from './routes/auth.js';
 
 dotenv.config();
 
