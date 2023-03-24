@@ -1,5 +1,6 @@
 import React from 'react';
 import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { Toaster } from 'react-hot-toast';
 import { Home } from './pages/Home';
 import { SignIn } from './pages/SignIn';
 import { SignUp } from './pages/SignUp';
@@ -7,6 +8,7 @@ import { SignUp } from './pages/SignUp';
 function App() {
 	return (
 		<BrowserRouter>
+			<Toaster />
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/signup" element={<SignUp />} />
