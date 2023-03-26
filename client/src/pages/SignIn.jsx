@@ -1,12 +1,10 @@
 import { useState } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/outline';
 import { toast } from 'react-hot-toast';
 
 export function SignIn() {
-	const navigate = useNavigate();
-
 	const [userData, setUserData] = useState({
 		email: '',
 		password: '',

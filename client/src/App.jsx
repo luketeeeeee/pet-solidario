@@ -1,18 +1,29 @@
 import React from 'react';
-import { BrowserRouter, Link, Route, Routes } from 'react-router-dom';
+import { BrowserRouter, Link, Navigate, Route, Routes } from 'react-router-dom';
 import { Toaster } from 'react-hot-toast';
 import { Home } from './pages/Home';
 import { SignIn } from './pages/SignIn';
 import { SignUp } from './pages/SignUp';
 
 function App() {
+	const user = JSON.parse(localStorage.getItem('token'));
+
 	return (
 		<BrowserRouter>
 			<Toaster />
 			<Routes>
 				<Route path="/" element={<Home />} />
-				<Route path="/signup" element={<SignUp />} />
-				<Route path="/signin" element={<SignIn />} />
+				{user ? (
+					<>
+						<Route path="/signup" element={<Navigate replace to="/" />} />
+						<Route path="/signin" element={<Navigate replace to="/" />} />
+					</>
+				) : (
+					<>
+						<Route path="/signup" element={<SignUp />} />
+						<Route path="/signin" element={<SignIn />} />
+					</>
+				)}
 			</Routes>
 		</BrowserRouter>
 	);
