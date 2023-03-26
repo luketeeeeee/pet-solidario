@@ -13,21 +13,23 @@ router.route('/').post(async (req, res) => {
         const { error } = validateSignIn(req.body);
 
         if (error)
-            return res.status(400).send({ message: error.details[0].message });
+            return res
+                .status(400)
+                .send({ message: 'Email ou senha inválidos!' });
 
         const user = await UserSchema.findOne({ email: email });
 
         if (!user)
             return res
                 .status(401)
-                .send({ message: 'Email ou senha inválidos' });
+                .send({ message: 'Email ou senha inválidos!' });
 
         const validPassword = await bcrypt.compare(password, user.password);
 
         if (!validPassword)
             return res
                 .status(401)
-                .send({ message: 'Email ou senha inválidos' });
+                .send({ message: 'Email ou senha inválidos!' });
 
         const token = user.generateAuthToken();
         res.status(200).send({

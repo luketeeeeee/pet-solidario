@@ -41,7 +41,6 @@ export function SignIn() {
 						toast.success(successfullyUserLoginMessage.message);
 						localStorage.setItem('token', text);
 						window.location = '/';
-						// achar uma forma de mostrar a mensagem de sucesso de login (ou não)
 					});
 				});
 			} catch (error) {

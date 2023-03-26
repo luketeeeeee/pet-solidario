@@ -14,7 +14,6 @@ router.route('/').post(async (req, res) => {
         const { error } = validateSignUp(req.body);
 
         if (error) {
-            console.log(error);
             if (error.details[0].type === 'passwordComplexity.numeric') {
                 return res.status(400).json({
                     message: 'A senha deve conter pelo menos um número!',
@@ -28,7 +27,7 @@ router.route('/').post(async (req, res) => {
             ) {
                 return res.status(400).json({
                     message:
-                        'A senha deve conter caracteres maiúsculos, minúsculos!',
+                        'A senha deve conter caracteres maiúsculos e minúsculos!',
                     success: false,
                 });
             }
