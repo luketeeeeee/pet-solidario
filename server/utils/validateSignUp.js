@@ -8,6 +8,9 @@ const validateSignUp = (data) => {
         phoneNumber: Joi.string().required().label('Celular'),
         email: Joi.string().email().required().label('Email'),
         password: passwordComplexity().required().label('Senha'),
+        confirmPassword: passwordComplexity()
+            .required()
+            .label('Confirmar Senha'),
     });
 
     return schema.validate(data);

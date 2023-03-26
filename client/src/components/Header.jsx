@@ -1,7 +1,16 @@
 import { Link } from 'react-router-dom';
+
+import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline';
 import logo from '../assets/logo.png';
 
 export function Header() {
+	const user = JSON.parse(localStorage.getItem('token'));
+
+	const handleLogout = () => {
+		localStorage.removeItem('token');
+		window.location.reload();
+	};
+
 	return (
 		<header className="flex w-full flex-wrap justify-between bg-slate-900 px-16 py-4 text-white">
 			<div className="flex w-72 justify-between">
@@ -18,19 +27,36 @@ export function Header() {
 			</div>
 
 			<div className="min-w-10 flex items-center justify-between gap-x-3 text-xl font-bold text-slate-900">
-				<Link
-					to="/signin"
-					className="max-h-11 rounded-xl bg-button-yellow px-5 py-2 transition duration-500 ease-in-out hover:bg-yellow-600"
-				>
-					Login
-				</Link>
+				{user ? (
+					<div className="flex w-48 justify-between">
+						<p className="flex items-center justify-center font-medium text-white">
+							Olá, {user.username}
+						</p>
+						<button
+							className="text-red-500"
+							title="Sair/Logout"
+							onClick={handleLogout}
+						>
+							<ArrowRightOnRectangleIcon className="w-10" />
+						</button>
+					</div>
+				) : (
+					<>
+						<Link
+							to="/signin"
+							className="max-h-11 rounded-xl bg-button-yellow px-5 py-2 transition duration-500 ease-in-out hover:bg-yellow-600"
+						>
+							Login
+						</Link>
 
-				<Link
-					to="/signup"
-					className="max-h-11 rounded-xl bg-button-yellow px-5 py-2 transition duration-500 ease-in-out hover:bg-yellow-600"
-				>
-					Cadastre-se
-				</Link>
+						<Link
+							to="/signup"
+							className="max-h-11 rounded-xl bg-button-yellow px-5 py-2 transition duration-500 ease-in-out hover:bg-yellow-600"
+						>
+							Cadastre-se
+						</Link>
+					</>
+				)}
 			</div>
 		</header>
 	);

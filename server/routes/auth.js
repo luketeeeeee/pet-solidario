@@ -8,22 +8,21 @@ const router = express.Router();
 
 router.route('/').post(async (req, res) => {
     try {
+        const { email, password } = req.body;
+
         const { error } = validateSignIn(req.body);
 
         if (error)
             return res.status(400).send({ message: error.details[0].message });
 
-        const user = await UserSchema.findOne({ email: req.body.email });
+        const user = await UserSchema.findOne({ email: email });
 
         if (!user)
             return res
                 .status(401)
                 .send({ message: 'Email ou senha inválidos' });
 
-        const validPassword = await bcrypt.compare(
-            req.body.password,
-            user.password
-        );
+        const validPassword = await bcrypt.compare(password, user.password);
 
         if (!validPassword)
             return res
@@ -33,9 +32,12 @@ router.route('/').post(async (req, res) => {
         const token = user.generateAuthToken();
         res.status(200).send({
             data: token,
+            username: user.username,
+            email: user.email,
             message: 'Login feito com sucesso',
         });
     } catch (error) {
+        console.log(error);
         res.status(500).send({ message: 'num sei, só sei que foi assim' });
     }
 });
