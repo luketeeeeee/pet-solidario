@@ -36,7 +36,6 @@ router.route('/').post(async (req, res) => {
             data: token,
             username: user.username,
             email: user.email,
-            message: 'Login feito com sucesso',
         });
     } catch (error) {
         console.log(error);
