@@ -4,6 +4,7 @@ import { Toaster } from 'react-hot-toast';
 import { Home } from './pages/Home';
 import { SignIn } from './pages/SignIn';
 import { SignUp } from './pages/SignUp';
+import { PetsList } from './pages/PetsList';
 
 function App() {
 	const user = JSON.parse(localStorage.getItem('token'));
@@ -13,6 +14,7 @@ function App() {
 			<Toaster />
 			<Routes>
 				<Route path="/" element={<Home />} />
+				<Route path="/pets" element={<PetsList />} />
 				{user ? (
 					<>
 						<Route path="/signup" element={<Navigate replace to="/" />} />

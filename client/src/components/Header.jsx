@@ -1,6 +1,10 @@
 import { Link } from 'react-router-dom';
 
-import { ArrowRightOnRectangleIcon } from '@heroicons/react/24/outline';
+import {
+	ArrowRightOnRectangleIcon,
+	PlusIcon,
+	UserCircleIcon,
+} from '@heroicons/react/24/outline';
 import logo from '../assets/logo.png';
 
 export function Header() {
@@ -21,20 +25,29 @@ export function Header() {
 				>
 					<img src={logo} alt="Pet solidario" className="w-16 max-w-xs" />
 				</Link>
-				<Link className="flex items-center transition duration-300 ease-in-out hover:text-slate-300">
+				<Link
+					to="/pets"
+					className="flex items-center transition duration-300 ease-in-out hover:text-slate-300"
+				>
 					<h1 className="text-xl">Pets para adoção</h1>
 				</Link>
 			</div>
 
 			<div className="min-w-10 flex items-center justify-between gap-x-3 text-xl font-bold text-slate-900">
 				{user ? (
-					<div className="flex w-48 justify-between">
-						<p className="flex items-center justify-center font-medium text-white">
+					<div className="flex w-64 justify-between">
+						<p className="flex items-center justify-center font-medium text-button-yellow">
 							Olá, {user.username}
 						</p>
+						<Link
+							className="flex w-10 items-center justify-center rounded-2xl bg-green-500 text-white"
+							title="Cadastrar um pet"
+						>
+							<PlusIcon className="w-7" />
+						</Link>
+
 						<button
-							className="text-red-500"
-							title="Sair/Logout"
+							className="flex items-center justify-center text-red-500"
 							onClick={handleLogout}
 						>
 							<ArrowRightOnRectangleIcon className="w-10" />

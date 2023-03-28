@@ -8,6 +8,7 @@ import connectDB from './mongodb/connect.js';
 // importação das rotas
 import usersRoutes from './routes/users.js';
 import authRoutes from './routes/auth.js';
+import petsRoutes from './routes/pets.js';
 
 dotenv.config();
 
@@ -18,6 +19,7 @@ app.use(express.json({ limit: '50mb' }));
 
 app.use('/api/users', usersRoutes);
 app.use('/api/auth', authRoutes);
+app.use('/api/pets', petsRoutes);
 
 app.get('/', async (req, res) => {
     res.send('teste');

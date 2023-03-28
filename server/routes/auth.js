@@ -18,15 +18,9 @@ router.route('/').post(async (req, res) => {
                 .send({ message: 'Email ou senha inválidos!' });
 
         const user = await UserSchema.findOne({ email: email });
-
-        if (!user)
-            return res
-                .status(401)
-                .send({ message: 'Email ou senha inválidos!' });
-
         const validPassword = await bcrypt.compare(password, user.password);
 
-        if (!validPassword)
+        if (!user || !validPassword)
             return res
                 .status(401)
                 .send({ message: 'Email ou senha inválidos!' });
