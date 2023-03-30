@@ -36,7 +36,6 @@ export function SignIn() {
 
 					return response.text().then((text) => {
 						let successfullyUserLoginMessage = JSON.parse(String(text));
-						toast.success(successfullyUserLoginMessage.message);
 						localStorage.setItem('token', text);
 						window.location = '/';
 					});

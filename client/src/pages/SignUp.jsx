@@ -44,7 +44,6 @@ export function SignUp() {
 					}
 
 					return response.text().then((text) => {
-						console.log(text);
 						let successfullyUserRegisterMessage = JSON.parse(String(text));
 						toast.success(successfullyUserRegisterMessage.message);
 						navigate('/signin');
