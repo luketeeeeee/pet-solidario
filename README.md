@@ -1,5 +1,5 @@
 ## pet-solidario
-Projeto da disciplina de Engenharia de Software, essa é uma aplicação web para adoção de animais.
+Projeto da disciplina de Engenharia de Software, essa é uma aplicação web para adoção de pets.
 
 ### Passos para a instalação
 1. Para copiar o repositório use o comando ```git clone https://github.com/luketeeeeee/pet-solidario.git``` ou baixe o repositório para a sua máquina.
