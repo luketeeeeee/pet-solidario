@@ -1,4 +1,4 @@
-## pet-solidario
+## Pet-solidário
 Projeto da disciplina de Engenharia de Software, essa é uma aplicação web para adoção de pets.
 
 ### Passos para a instalação
