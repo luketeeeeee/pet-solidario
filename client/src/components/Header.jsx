@@ -16,7 +16,7 @@ export function Header() {
 	};
 
 	return (
-		<header className="flex h-[13%] w-full flex-wrap justify-between bg-slate-900 px-16 py-3 text-white lg:h-[10%] ">
+		<header className="flex h-[15%] w-full flex-wrap justify-between bg-slate-900 px-16 py-3 text-white xl:h-[12%]">
 			<div className="flex w-72 justify-between">
 				<Link
 					to="/"
