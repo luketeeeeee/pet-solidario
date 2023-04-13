@@ -56,12 +56,12 @@ export function SignIn() {
 						className="flex w-full flex-col rounded-3xl bg-black bg-opacity-60 p-6 text-center"
 						onSubmit={handleSubmit}
 					>
-						<Link to="/" className="h-5 w-14" title="Voltar à página inicial">
+						<Link to="/" className="h-10 w-14" title="Voltar à página inicial">
 							<ArrowLeftCircleIcon className="h-20 w-14" />
 						</Link>
 						<h1 className="text-3xl">Login</h1>
 
-						<div className="mt-20 flex h-80 flex-col justify-between text-lg text-black">
+						<div className="mt-10 flex h-80 flex-col justify-between text-lg text-black">
 							<input
 								type="text"
 								placeholder="Email"
@@ -101,10 +101,8 @@ export function SignIn() {
 								<u>Esqueceu a senha?</u>
 							</Link>
 
+					
 						
-							
-}
-
 						</div>
 					</form>
 				</div>
