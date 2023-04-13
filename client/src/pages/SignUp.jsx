@@ -65,7 +65,7 @@ export function SignUp() {
 						className="flex w-11/12 flex-col rounded-3xl bg-black bg-opacity-60 p-6 text-center"
 						onSubmit={handleSubmit}
 					>
-						<Link to="/" className="h-14 w-14" title="Voltar à página inicial">
+						<Link to="/" className="h-10 w-14" title="Voltar à página inicial">
 							<ArrowLeftCircleIcon className="h-14 w-14" />
 						</Link>
 						<h1 className="text-3xl">Cadastre-se</h1>
@@ -78,7 +78,7 @@ export function SignUp() {
 								onChange={handleChange}
 								value={userData.username}
 								required
-								className="h-16 rounded-2xl px-5 placeholder:text-gray-400"
+								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
 							/>
 							<input
 								type="text"
@@ -87,7 +87,7 @@ export function SignUp() {
 								onChange={handleChange}
 								value={userData.phoneNumber}
 								required
-								className="h-16 rounded-2xl px-5 placeholder:text-gray-400"
+								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
 							/>
 
 							<input
@@ -97,7 +97,7 @@ export function SignUp() {
 								onChange={handleChange}
 								value={userData.email}
 								required
-								className="h-16 rounded-2xl px-5 placeholder:text-gray-400"
+								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
 							/>
 
 							<input
@@ -109,7 +109,7 @@ export function SignUp() {
 								minLength={8}
 								maxLength={30}
 								required
-								className="h-16 rounded-2xl px-5 placeholder:text-gray-400"
+								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
 							/>
 
 							<input
@@ -121,8 +121,9 @@ export function SignUp() {
 								minLength={8}
 								maxLength={30}
 								required
-								className="h-16 rounded-2xl px-5 placeholder:text-gray-400"
+								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
 							/>
+							<h2 className="text-1xl text-white"> * A senha deve conter: letras maiúsculas e minúsculas, caractere especial e número.</h2>
 
 							<button
 								type="submit"
