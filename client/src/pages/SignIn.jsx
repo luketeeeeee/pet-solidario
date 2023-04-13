@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { ArrowLeftCircleIcon, CursorArrowRaysIcon } from '@heroicons/react/24/outline';
+import { ArrowLeftCircleIcon } from '@heroicons/react/24/outline';
 import { toast } from 'react-hot-toast';
 
 export function SignIn() {
@@ -53,15 +53,15 @@ export function SignIn() {
 			<main className="flex h-full items-center justify-center bg-signin-img bg-cover bg-no-repeat text-white">
 				<div className="flex h-[500px] w-[550px] justify-center">
 					<form
-						className="flex w-full flex-col rounded-3xl bg-black bg-opacity-60 p-6 text-center"
+						className="flex w-full flex-col justify-between rounded-3xl bg-black bg-opacity-60 p-6 text-center"
 						onSubmit={handleSubmit}
 					>
-						<Link to="/" className="h-10 w-14" title="Voltar à página inicial">
-							<ArrowLeftCircleIcon className="h-20 w-14" />
+						<Link to="/" className="h-14 w-14" title="Voltar à página inicial">
+							<ArrowLeftCircleIcon className="h-14 w-14" />
 						</Link>
 						<h1 className="text-3xl">Login</h1>
 
-						<div className="mt-10 flex h-80 flex-col justify-between text-lg text-black">
+						<div className="mt-7 flex h-full flex-col justify-between text-lg text-black">
 							<input
 								type="text"
 								placeholder="Email"
@@ -78,7 +78,7 @@ export function SignIn() {
 								onChange={handleChange}
 								value={userData.password}
 								required
-								className="h-14 mt-5 rounded-2xl px-5 placeholder:text-gray-400"
+								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
 							/>
 							<button
 								type="submit"
@@ -89,20 +89,17 @@ export function SignIn() {
 
 							<Link
 								to="/signup"
-								className="flex mt-5 h-16 w-64 items-center justify-center self-center rounded-2xl bg-slate-900 text-lg text-white transition duration-500 ease-in-out hover:bg-slate-800"
+								className="flex h-16 w-64 items-center justify-center self-center rounded-2xl bg-slate-900 text-lg text-white transition duration-500 ease-in-out hover:bg-slate-800"
 							>
 								Cadastre-se
 							</Link>
 
 							<Link
-								to="mudarSenha"
-								className="flex mt-5 items-center justify-center self-center  text-lg text-white ease-in-out"
+								to="/mudar-senha"
+								className="flex items-center justify-center self-center  text-lg text-white ease-in-out"
 							>
 								<u>Esqueceu a senha?</u>
 							</Link>
-
-					
-						
 						</div>
 					</form>
 				</div>
