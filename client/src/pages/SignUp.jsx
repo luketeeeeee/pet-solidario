@@ -60,7 +60,7 @@ export function SignUp() {
 	return (
 		<>
 			<main className="flex h-full items-center justify-end bg-signup-img bg-cover bg-no-repeat text-white">
-				<div className="mr-12 flex h-[620px] w-[600px] justify-start">
+				<div className="mr-12 flex h-[650px] w-[600px] justify-start">
 					<form
 						className="flex w-11/12 flex-col rounded-3xl bg-black bg-opacity-60 p-6 text-center"
 						onSubmit={handleSubmit}
@@ -78,7 +78,7 @@ export function SignUp() {
 								onChange={handleChange}
 								value={userData.username}
 								required
-								className="h-16 rounded-2xl px-5 placeholder:text-gray-400"
+								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
 							/>
 							<input
 								type="text"
@@ -87,7 +87,7 @@ export function SignUp() {
 								onChange={handleChange}
 								value={userData.phoneNumber}
 								required
-								className="h-16 rounded-2xl px-5 placeholder:text-gray-400"
+								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
 							/>
 
 							<input
@@ -97,7 +97,7 @@ export function SignUp() {
 								onChange={handleChange}
 								value={userData.email}
 								required
-								className="h-16 rounded-2xl px-5 placeholder:text-gray-400"
+								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
 							/>
 
 							<input
@@ -109,7 +109,7 @@ export function SignUp() {
 								minLength={8}
 								maxLength={30}
 								required
-								className="h-16 rounded-2xl px-5 placeholder:text-gray-400"
+								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
 							/>
 
 							<input
@@ -121,8 +121,13 @@ export function SignUp() {
 								minLength={8}
 								maxLength={30}
 								required
-								className="h-16 rounded-2xl px-5 placeholder:text-gray-400"
+								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
 							/>
+							<h2 className="text-1xl mt-5 leading-5 text-white">
+								{' '}
+								*A senha deve conter: ao menos uma letra maiúscula, uma
+								minúscula, um caractere especial e um número.
+							</h2>
 
 							<button
 								type="submit"
