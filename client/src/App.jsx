@@ -5,6 +5,7 @@ import { Home } from './pages/Home';
 import { SignIn } from './pages/SignIn';
 import { SignUp } from './pages/SignUp';
 import { PetsList } from './pages/PetsList';
+import { AddPets } from './pages/AddPets';
 
 function App() {
 	const user = JSON.parse(localStorage.getItem('token'));
@@ -15,6 +16,7 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/pets" element={<PetsList />} />
+				<Route path="/add-pet" element={<AddPets />} />
 				{user ? (
 					<>
 						<Route path="/signup" element={<Navigate replace to="/" />} />
