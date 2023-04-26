@@ -3,17 +3,22 @@ import { Link } from 'react-router-dom';
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/outline';
 
 export function AddPets() {
+	const user = JSON.parse(localStorage.getItem('token'));
+
 	const [petData, setPetData] = useState({
 		name: '',
-		breed: '',
 		species: '',
+		sex: '',
+		breed: '',
+		ownerName: user.username,
+		ownerEmail: user.email,
+		description: '',
 	});
+	const [foto, setFoto] = useState('');
 
 	const handleChange = (e) => {
 		setPetData({ ...petData, [e.target.name]: e.target.value });
 	};
-
-	const [foto, setFoto] = useState('');
 
 	const handleFotoChange = (event) => {
 		const file = event.target.files[0];
@@ -30,6 +35,11 @@ export function AddPets() {
 		}
 	};
 
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+		console.log(petData);
+	};
+
 	return (
 		<main className="flex min-h-screen items-center justify-center bg-addpet-img bg-cover bg-no-repeat text-white">
 			<div className="flex h-[700px] w-[800px] items-center justify-center">
@@ -38,6 +48,7 @@ export function AddPets() {
 					method="post"
 					className="flex h-auto w-full flex-col justify-between rounded-3xl bg-black bg-opacity-60 p-6 text-center"
 					autoComplete="off"
+					onSubmit={handleSubmit}
 				>
 					<Link to="/" className="h-14 w-14" title="Voltar à página inicial">
 						<ArrowLeftCircleIcon className="h-14 w-14" />
@@ -111,34 +122,37 @@ export function AddPets() {
 								/>
 							</div>
 							<div className="mb-3">
-								<p>Sexo</p>
+								<p className="text-xl">Sexo</p>
 								<div className="flex">
 									<input
 										type="radio"
-										name="sexo"
-										id="macho"
-										value="Macho"
+										name="sex"
+										id="male"
+										value="male"
 										className="w-9"
+										onClick={handleChange}
 									/>
-									<label htmlFor="macho" className="my-o mx-auto">
+									<label htmlFor="male" className="my-o mx-auto">
 										Macho
 									</label>
 									<input
 										type="radio"
-										name="sexo"
-										id="femea"
-										value="Fêmea"
+										name="sex"
+										id="female"
+										value="female"
 										className="w-9"
+										onClick={handleChange}
 									/>
-									<label htmlFor="femea" className="my-o mx-auto">
+									<label htmlFor="female" className="my-o mx-auto">
 										Fêmea
 									</label>
 									<input
 										type="radio"
-										name="sexo"
+										name="sex"
 										id="none"
-										value="None"
+										value="none"
 										className="w-9"
+										onClick={handleChange}
 									/>
 									<label htmlFor="none" className="my-o mr-0 ml-auto">
 										Não informar
@@ -148,11 +162,13 @@ export function AddPets() {
 							<div>
 								<p>Descreva as caracteríticas do seu pet</p>
 								<textarea
-									name="desc"
-									id="desc"
+									name="description"
+									id="description"
 									cols="30"
 									rows="10"
-									className="h-32 w-full   resize-none rounded-2xl p-3 text-base text-black scrollbar-none"
+									className="h-32 w-full resize-none rounded-2xl p-3 text-base text-black scrollbar-none"
+									onChange={handleChange}
+									value={petData.description}
 								/>
 							</div>
 						</div>

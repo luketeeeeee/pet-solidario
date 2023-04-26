@@ -15,14 +15,16 @@ router.route('/').get(async (req, res) => {
 
 router.route('/').post(async (req, res) => {
     try {
-        const { name, species, sex, breed, owner } = req.body;
+        const { name, species, sex, breed, ownerName, ownerEmail } = req.body;
 
         const newPet = await PetSchema.create({
             name,
             species,
             sex,
             breed,
-            owner,
+            ownerName,
+            ownerEmail,
+            description,
         });
 
         res.status(201).json({
