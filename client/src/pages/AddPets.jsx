@@ -32,11 +32,11 @@ export function AddPets() {
 
 	return (
 		<main className="flex min-h-screen items-center justify-center bg-addpet-img bg-cover bg-no-repeat text-white">
-			<div className="flex h-[650px] w-[750px] items-center justify-center">
+			<div className="flex h-[700px] w-[800px] items-center justify-center">
 				<form
 					action=""
 					method="post"
-					className="flex h-auto w-full flex-col rounded-3xl bg-black bg-opacity-60 p-6 text-center"
+					className="flex h-auto w-full flex-col justify-between rounded-3xl bg-black bg-opacity-60 p-6 text-center"
 					autoComplete="off"
 				>
 					<Link to="/" className="h-14 w-14" title="Voltar à página inicial">
@@ -73,10 +73,10 @@ export function AddPets() {
 									className="hidden"
 									onChange={handleFotoChange}
 								/>
-								<span>Escolher Foto do pet</span>
+								<span>Escolher foto do pet</span>
 							</label>
 						</div>
-						<div>
+						<div className="flex w-[370px] flex-col">
 							<div className="mb-3">
 								<input
 									type="text"
@@ -85,7 +85,7 @@ export function AddPets() {
 									onChange={handleChange}
 									value={petData.name}
 									placeholder="Nome do pet"
-									className="h-14 w-80 rounded-2xl px-5 text-black"
+									className="h-14 w-full rounded-2xl px-5 text-black"
 								/>
 							</div>
 							<div className="mb-3">
@@ -96,7 +96,7 @@ export function AddPets() {
 									onChange={handleChange}
 									value={petData.species}
 									placeholder="Espécie: cachorro, gato, passáro..."
-									className="h-14 w-80 rounded-2xl px-5 text-black"
+									className="h-14 w-full rounded-2xl px-5 text-black"
 								/>
 							</div>
 							<div className="mb-3">
@@ -107,7 +107,7 @@ export function AddPets() {
 									onChange={handleChange}
 									value={petData.breed}
 									placeholder="Raça: buldogue, siamês, arara, ..."
-									className="h-14 w-80 rounded-2xl px-5 text-black"
+									className="h-14 w-full rounded-2xl px-5 text-black"
 								/>
 							</div>
 							<div className="mb-3">
@@ -152,7 +152,7 @@ export function AddPets() {
 									id="desc"
 									cols="30"
 									rows="10"
-									className="h-32 resize-none rounded-2xl p-3 text-base text-black"
+									className="h-32 w-full   resize-none rounded-2xl p-3 text-base text-black scrollbar-none"
 								/>
 							</div>
 						</div>
