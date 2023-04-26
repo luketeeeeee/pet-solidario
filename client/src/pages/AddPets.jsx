@@ -32,27 +32,27 @@ export function AddPets() {
 
 	return (
 		<main className="flex min-h-screen items-center justify-center bg-addpet-img bg-cover bg-no-repeat text-white">
-			<div className="mr-12 flex h-[650px] w-[600px] justify-start">
+			<div className="flex h-[650px] w-[750px] items-center justify-center">
 				<form
 					action=""
 					method="post"
-					className="flex h-auto flex-col rounded-3xl bg-black bg-opacity-60 p-6 text-center"
+					className="flex h-auto w-full flex-col rounded-3xl bg-black bg-opacity-60 p-6 text-center"
 					autoComplete="off"
 				>
+					<Link to="/" className="h-14 w-14" title="Voltar à página inicial">
+						<ArrowLeftCircleIcon className="h-14 w-14" />
+					</Link>
 					<div className="flex">
-						<Link to="/" className="h-14 w-14" title="Voltar à página inicial">
-							<ArrowLeftCircleIcon className="h-14 w-14" />
-						</Link>
 						<h1 className="m-auto text-3xl">Cadastre seu pet</h1>
 					</div>
-					<div className="mt-6 flex">
-						<div className="mr-10">
+					<div className="mt-6 flex justify-between">
+						<div className="w-[320px]">
 							<label
 								htmlFor="foto"
 								id="fotoLabel"
 								tabIndex={0}
 								style={{
-									width: '350px',
+									width: '320px',
 									aspectRatio: '16/12',
 									background: '#ddd',
 									display: 'flex',
@@ -95,7 +95,7 @@ export function AddPets() {
 									id="species"
 									onChange={handleChange}
 									value={petData.species}
-									placeholder="Espécie: Cachorro, Gato, Passáro, ..."
+									placeholder="Espécie: cachorro, gato, passáro..."
 									className="h-14 w-80 rounded-2xl px-5 text-black"
 								/>
 							</div>
@@ -106,23 +106,43 @@ export function AddPets() {
 									id="breed"
 									onChange={handleChange}
 									value={petData.breed}
-									placeholder="Raça: Buldogue, Siamês, Arara, ..."
+									placeholder="Raça: buldogue, siamês, arara, ..."
 									className="h-14 w-80 rounded-2xl px-5 text-black"
 								/>
 							</div>
 							<div className="mb-3">
 								<p>Sexo</p>
-								<div>
-									<input type="radio" name="sexo" id="macho" value="Macho" />
-									<label htmlFor="macho" className="mr-5 ml-3">
+								<div className="flex">
+									<input
+										type="radio"
+										name="sexo"
+										id="macho"
+										value="Macho"
+										className="w-9"
+									/>
+									<label htmlFor="macho" className="my-o mx-auto">
 										Macho
 									</label>
-									<input type="radio" name="sexo" id="femea" value="Fêmea" />
-									<label htmlFor="femea" className="mr-5">
+									<input
+										type="radio"
+										name="sexo"
+										id="femea"
+										value="Fêmea"
+										className="w-9"
+									/>
+									<label htmlFor="femea" className="my-o mx-auto">
 										Fêmea
 									</label>
-									<input type="radio" name="sexo" id="none" value="None" />
-									<label htmlFor="none">Não informar</label>
+									<input
+										type="radio"
+										name="sexo"
+										id="none"
+										value="None"
+										className="w-9"
+									/>
+									<label htmlFor="none" className="my-o mr-0 ml-auto">
+										Não informar
+									</label>
 								</div>
 							</div>
 							<div>
@@ -132,7 +152,7 @@ export function AddPets() {
 									id="desc"
 									cols="30"
 									rows="10"
-									className="h-32 resize-none rounded-2xl px-3 text-base text-black"
+									className="h-32 resize-none rounded-2xl p-3 text-base text-black"
 								/>
 							</div>
 						</div>
