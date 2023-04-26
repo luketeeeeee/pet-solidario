@@ -16,14 +16,15 @@ function App() {
 			<Routes>
 				<Route path="/" element={<Home />} />
 				<Route path="/pets" element={<PetsList />} />
-				<Route path="/add-pet" element={<AddPets />} />
 				{user ? (
 					<>
+						<Route path="/add-pet" element={<AddPets />} />
 						<Route path="/signup" element={<Navigate replace to="/" />} />
 						<Route path="/signin" element={<Navigate replace to="/" />} />
 					</>
 				) : (
 					<>
+						<Route path="/add-pet" element={<Navigate replace to="/" />} />
 						<Route path="/signup" element={<SignUp />} />
 						<Route path="/signin" element={<SignIn />} />
 					</>
