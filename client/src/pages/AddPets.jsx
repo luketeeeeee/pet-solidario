@@ -41,6 +41,7 @@ export function AddPets() {
 
 		if (petData.name && petData.breed && petData.species && petData.sex) {
 			try {
+				await fetch('https://localhost:8080/api/pets', {});
 			} catch (error) {}
 		}
 	};
