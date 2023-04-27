@@ -64,6 +64,7 @@ export function AddPets() {
 								tabIndex={0}
 								style={{
 									width: '320px',
+									height: '320px',
 									aspectRatio: '16/12',
 									background: '#ddd',
 									display: 'flex',
@@ -73,10 +74,13 @@ export function AddPets() {
 									border: '3px dashed',
 									cursor: 'pointer',
 									backgroundImage: `url(${foto})`,
-									backgroundSize: 'cover',
+									backgroundSize: 'contain',
+									backgroundRepeat: 'no-repeat',
+									backgroundPosition: 'center',
 									borderRadius: '20px',
 								}}
 							>
+								<span>Escolher foto do pet</span>
 								<input
 									type="file"
 									name="foto"
@@ -84,7 +88,6 @@ export function AddPets() {
 									className="hidden"
 									onChange={handleFotoChange}
 								/>
-								<span>Escolher foto do pet</span>
 							</label>
 						</div>
 						<div className="flex w-[370px] flex-col">
