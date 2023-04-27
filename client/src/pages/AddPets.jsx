@@ -5,6 +5,7 @@ import { ArrowLeftCircleIcon } from '@heroicons/react/24/outline';
 export function AddPets() {
 	const user = JSON.parse(localStorage.getItem('token'));
 
+	const [photo, setPhoto] = useState('');
 	const [petData, setPetData] = useState({
 		name: '',
 		species: '',
@@ -14,30 +15,34 @@ export function AddPets() {
 		ownerEmail: user.email,
 		description: '',
 	});
-	const [foto, setFoto] = useState('');
 
 	const handleChange = (e) => {
 		setPetData({ ...petData, [e.target.name]: e.target.value });
 	};
 
-	const handleFotoChange = (event) => {
+	const handlePhotoChange = (event) => {
 		const file = event.target.files[0];
 		if (file) {
 			const reader = new FileReader();
 			reader.onload = function (event) {
 				console.log('Imagem lida com sucesso!');
-				setFoto(event.target.result);
+				setPhoto(event.target.result);
 			};
 
 			reader.readAsDataURL(file);
 		} else {
-			setFoto('');
+			setPhoto('');
 		}
 	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(petData);
+		console.log(petData, photo);
+
+		if (petData.name && petData.breed && petData.species && petData.sex) {
+			try {
+			} catch (error) {}
+		}
 	};
 
 	return (
@@ -62,31 +67,20 @@ export function AddPets() {
 								htmlFor="foto"
 								id="fotoLabel"
 								tabIndex={0}
+								className="flex aspect-video h-[420px] w-80 cursor-pointer items-center justify-center rounded-2xl 
+                                bg-[#ddd] bg-contain bg-center bg-no-repeat text-[#aaa]"
 								style={{
-									width: '320px',
-									height: '320px',
-									aspectRatio: '16/12',
-									background: '#ddd',
-									display: 'flex',
-									alignItems: 'center',
-									justifyContent: 'center',
-									color: '#aaa',
 									border: '3px dashed',
-									cursor: 'pointer',
-									backgroundImage: `url(${foto})`,
-									backgroundSize: 'contain',
-									backgroundRepeat: 'no-repeat',
-									backgroundPosition: 'center',
-									borderRadius: '20px',
+									backgroundImage: `url(${photo})`,
 								}}
 							>
-								<span>Escolher foto do pet</span>
+								{photo ? <span></span> : <span>Escolher foto do pet</span>}
 								<input
 									type="file"
 									name="foto"
 									id="foto"
 									className="hidden"
-									onChange={handleFotoChange}
+									onChange={handlePhotoChange}
 								/>
 							</label>
 						</div>
@@ -178,7 +172,8 @@ export function AddPets() {
 					</div>
 					<button
 						type="submit"
-						className="bottom-0 mt-3 h-16 w-80 self-center rounded-2xl bg-button-yellow text-xl font-bold text-slate-50 transition duration-500 ease-in-out hover:bg-yellow-600"
+						className="bottom-0 mt-5 h-16 w-80 self-center rounded-2xl bg-button-yellow text-xl font-bold 
+                        text-slate-50 transition duration-500 ease-in-out hover:bg-yellow-600"
 					>
 						Adicionar pet para adoção
 					</button>
