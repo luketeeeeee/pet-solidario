@@ -60,12 +60,12 @@ export function SignUp() {
 	return (
 		<>
 			<main className="flex h-full items-center justify-end bg-signup-img bg-cover bg-no-repeat text-white">
-				<div className="mr-12 flex h-[620px] w-[600px] justify-start">
+				<div className="mr-12 flex h-[650px] w-[600px] justify-start">
 					<form
 						className="flex w-11/12 flex-col rounded-3xl bg-black bg-opacity-60 p-6 text-center"
 						onSubmit={handleSubmit}
 					>
-						<Link to="/" className="h-10 w-14" title="Voltar à página inicial">
+						<Link to="/" className="h-14 w-14" title="Voltar à página inicial">
 							<ArrowLeftCircleIcon className="h-14 w-14" />
 						</Link>
 						<h1 className="text-3xl">Cadastre-se</h1>
@@ -123,7 +123,11 @@ export function SignUp() {
 								required
 								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
 							/>
-							<h2 className="text-1xl text-white"> * A senha deve conter: letras maiúsculas e minúsculas, caractere especial e número.</h2>
+							<h2 className="text-1xl mt-5 leading-5 text-white">
+								{' '}
+								*A senha deve conter: ao menos uma letra maiúscula, uma
+								minúscula, um caractere especial e um número.
+							</h2>
 
 							<button
 								type="submit"

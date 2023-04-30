@@ -5,7 +5,9 @@ const Pet = new mongoose.Schema({
     species: { type: String, required: true },
     sex: { type: String },
     breed: { type: String },
-    owner: { type: String, required: true },
+    ownerName: { type: String, required: true },
+    ownerEmail: { type: String, required: true },
+    description: { type: String },
 });
 
 const PetSchema = mongoose.model('Pet', Pet);
