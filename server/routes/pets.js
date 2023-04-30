@@ -15,7 +15,8 @@ router.route('/').get(async (req, res) => {
 
 router.route('/').post(async (req, res) => {
     try {
-        const { name, species, sex, breed, ownerName, ownerEmail } = req.body;
+        const { name, species, sex, breed, ownerName, ownerEmail, description } =
+            req.body;
 
         const newPet = await PetSchema.create({
             name,
