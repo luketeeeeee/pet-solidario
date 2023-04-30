@@ -14,8 +14,8 @@ export function Home() {
 							A adoção é um ato de amor e responsabilidade.
 						</p>
 						<p className="w-full text-xl font-medium md:text-2xl">
-						O Pet Solidário é um site de internet que apresenta uma maneira simples de se adotar ou anunciar para adopção um animal que tenha sido encontrado ou que esteja em risco de abandono.
-						Não somos uma associação nem temos instalações de canil ou gatil: através dos anúncios aqui colocados ajudamos animais que estejam para adopção a chegarem a quem os procure, criando assim oportunidades de integrar animais em risco. Juntos somos mais fortes!
+						O Pet Solidário é um site que apresenta uma maneira simples de se adotar ou anunciar para adoção um animal que tenha sido encontrado ou que esteja em risco de abandono.
+						Não somos uma associação nem temos instalações de canil ou gatil: através dos anúncios aqui colocados ajudamos animais que estejam para adoção a chegarem a quem os procure, criando assim oportunidades de integrar animais em risco. Juntos somos mais fortes!
 						</p>
 					</div>
 				</div>

@@ -1,8 +1,11 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/outline';
+import { toast } from 'react-hot-toast';
 
 export function AddPets() {
+	const navigate = useNavigate();
+
 	const user = JSON.parse(localStorage.getItem('token'));
 
 	const [photo, setPhoto] = useState('');
@@ -41,8 +44,32 @@ export function AddPets() {
 
 		if (petData.name && petData.breed && petData.species && petData.sex) {
 			try {
-				await fetch('https://localhost:8080/api/pets', {});
-			} catch (error) {}
+				await fetch('http://localhost:8080/api/pets', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(petData),
+				}).then((response) => {
+					console.log(response);
+					if (!response.ok) {
+						return response.text().then((text) => {
+							throw new String(text);
+						});
+					}
+
+					return response.text().then((text) => {
+						let successfullyPetRegisterMessage = JSON.parse(String(text));
+						toast.success(successfullyPetRegisterMessage);
+						navigate('/pets');
+					});
+				});
+			} catch (error) {
+				console.log(response);
+				let errorJsonFormat = JSON.parse(error);
+
+				toast.error(errorJsonFormat.message);
+			}
 		}
 	};
 
@@ -95,6 +122,7 @@ export function AddPets() {
 									value={petData.name}
 									placeholder="Nome do pet"
 									className="h-14 w-full rounded-2xl px-5 text-black"
+									required
 								/>
 							</div>
 							<div className="mb-3">
@@ -106,6 +134,7 @@ export function AddPets() {
 									value={petData.species}
 									placeholder="Espécie: cachorro, gato, passáro..."
 									className="h-14 w-full rounded-2xl px-5 text-black"
+									required
 								/>
 							</div>
 							<div className="mb-3">
@@ -117,6 +146,7 @@ export function AddPets() {
 									value={petData.breed}
 									placeholder="Raça: buldogue, siamês, arara, ..."
 									className="h-14 w-full rounded-2xl px-5 text-black"
+									required
 								/>
 							</div>
 							<div className="mb-3">
@@ -129,6 +159,7 @@ export function AddPets() {
 										value="male"
 										className="w-9"
 										onClick={handleChange}
+										required
 									/>
 									<label htmlFor="male" className="my-o mx-auto">
 										Macho
@@ -140,6 +171,7 @@ export function AddPets() {
 										value="female"
 										className="w-9"
 										onClick={handleChange}
+										required
 									/>
 									<label htmlFor="female" className="my-o mx-auto">
 										Fêmea
@@ -151,6 +183,7 @@ export function AddPets() {
 										value="none"
 										className="w-9"
 										onClick={handleChange}
+										required
 									/>
 									<label htmlFor="none" className="my-o mr-0 ml-auto">
 										Não informar
