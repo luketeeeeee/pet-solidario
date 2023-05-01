@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/outline';
@@ -40,16 +41,26 @@ export function AddPets() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(petData, photo);
+		console.log(petData.photo);
 
-		if (petData.name && petData.breed && petData.species && petData.sex) {
+		if (!photo) {
+			toast.error('Por favor, insira uma foto do pet!');
+		}
+
+		if (
+			petData.name &&
+			petData.breed &&
+			petData.species &&
+			petData.sex &&
+			photo
+		) {
 			try {
 				await fetch('http://localhost:8080/api/pets', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
 					},
-					body: JSON.stringify(petData),
+					body: JSON.stringify([petData, photo]),
 				}).then((response) => {
 					console.log(response);
 					if (!response.ok) {
@@ -60,7 +71,7 @@ export function AddPets() {
 
 					return response.text().then((text) => {
 						let successfullyPetRegisterMessage = JSON.parse(String(text));
-						toast.success(successfullyPetRegisterMessage);
+						toast.success(successfullyPetRegisterMessage.message);
 						navigate('/pets');
 					});
 				});
