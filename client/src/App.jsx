@@ -5,6 +5,7 @@ import { Home } from './pages/Home';
 import { SignIn } from './pages/SignIn';
 import { SignUp } from './pages/SignUp';
 import { PetsList } from './pages/PetsList';
+import { ResetPassword } from './pages/ResetPassword';
 
 function App() {
 	const user = JSON.parse(localStorage.getItem('token'));
@@ -19,11 +20,13 @@ function App() {
 					<>
 						<Route path="/signup" element={<Navigate replace to="/" />} />
 						<Route path="/signin" element={<Navigate replace to="/" />} />
+						<Route path="/mudar-senha" element={<Navigate replace to="/" />} />
 					</>
 				) : (
 					<>
 						<Route path="/signup" element={<SignUp />} />
 						<Route path="/signin" element={<SignIn />} />
+						<Route path="/mudar-senha" element={<ResetPassword />} />
 					</>
 				)}
 			</Routes>
