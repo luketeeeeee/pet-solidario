@@ -1,8 +1,18 @@
 import express from 'express';
+import * as dotenv from 'dotenv';
+import { v2 as cloudinary } from 'cloudinary';
 
 import PetSchema from '../mongodb/models/pet.js';
 
+dotenv.config();
+
 const router = express.Router();
+
+cloudinary.config({
+    cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
+    api_key: process.env.CLOUDINARY_API_KEY,
+    api_secret: process.env.CLOUDINARY_API_SECRET,
+});
 
 router.route('/').get(async (req, res) => {
     try {
@@ -15,14 +25,22 @@ router.route('/').get(async (req, res) => {
 
 router.route('/').post(async (req, res) => {
     try {
-        const { name, species, sex, breed, owner } = req.body;
+        const [
+            { name, species, sex, breed, ownerName, ownerEmail, description, adopted },
+            photo,
+        ] = req.body;
+        const photoUrl = await cloudinary.uploader.upload(photo);
 
         const newPet = await PetSchema.create({
             name,
             species,
             sex,
             breed,
-            owner,
+            ownerName,
+            ownerEmail,
+            description,
+            adopted,
+            photo: photoUrl.url,
         });
 
         res.status(201).json({
