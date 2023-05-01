@@ -25,8 +25,10 @@ router.route('/').get(async (req, res) => {
 
 router.route('/').post(async (req, res) => {
     try {
-        const [{ name, species, sex, breed, ownerName, ownerEmail, description }, photo] =
-            req.body;
+        const [
+            { name, species, sex, breed, ownerName, ownerEmail, description, adopted },
+            photo,
+        ] = req.body;
         const photoUrl = await cloudinary.uploader.upload(photo);
 
         const newPet = await PetSchema.create({
@@ -37,6 +39,7 @@ router.route('/').post(async (req, res) => {
             ownerName,
             ownerEmail,
             description,
+            adopted,
             photo: photoUrl.url,
         });
 

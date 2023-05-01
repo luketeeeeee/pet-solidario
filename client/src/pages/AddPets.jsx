@@ -18,6 +18,7 @@ export function AddPets() {
 		ownerName: user.username,
 		ownerEmail: user.email,
 		description: '',
+		adopted: false,
 	});
 
 	const handleChange = (e) => {
@@ -47,13 +48,7 @@ export function AddPets() {
 			toast.error('Por favor, insira uma foto do pet!');
 		}
 
-		if (
-			petData.name &&
-			petData.breed &&
-			petData.species &&
-			petData.sex &&
-			photo
-		) {
+		if (petData.name && petData.species && petData.sex && photo) {
 			try {
 				await fetch('http://localhost:8080/api/pets', {
 					method: 'POST',
@@ -113,7 +108,7 @@ export function AddPets() {
 									backgroundImage: `url(${photo})`,
 								}}
 							>
-								{photo ? <span></span> : <span>Escolher foto do pet</span>}
+								{photo ? <span></span> : <span>*Escolher foto do pet</span>}
 								<input
 									type="file"
 									name="foto"
@@ -131,7 +126,7 @@ export function AddPets() {
 									id="name"
 									onChange={handleChange}
 									value={petData.name}
-									placeholder="Nome do pet"
+									placeholder="*Nome do pet"
 									className="h-14 w-full rounded-2xl px-5 text-black"
 									required
 								/>
@@ -143,7 +138,7 @@ export function AddPets() {
 									id="species"
 									onChange={handleChange}
 									value={petData.species}
-									placeholder="Espécie: cachorro, gato, passáro..."
+									placeholder="*Espécie: cachorro, gato, passáro..."
 									className="h-14 w-full rounded-2xl px-5 text-black"
 									required
 								/>
@@ -157,11 +152,10 @@ export function AddPets() {
 									value={petData.breed}
 									placeholder="Raça: buldogue, siamês, arara, ..."
 									className="h-14 w-full rounded-2xl px-5 text-black"
-									required
 								/>
 							</div>
 							<div className="mb-3">
-								<p className="text-xl">Sexo</p>
+								<p className="text-xl">Sexo*</p>
 								<div className="flex">
 									<input
 										type="radio"
@@ -202,19 +196,21 @@ export function AddPets() {
 								</div>
 							</div>
 							<div>
-								<p>Descreva as caracteríticas do seu pet</p>
+								{/* <p>Descreva as caracteríticas do seu pet</p> */}
 								<textarea
 									name="description"
 									id="description"
+									placeholder="Descreva as características do seu pet"
 									cols="30"
 									rows="10"
-									className="h-32 w-full resize-none rounded-2xl p-3 text-base text-black scrollbar-none"
+									className="h-32 w-full resize-none rounded-2xl px-4 py-3 text-base text-black scrollbar-none"
 									onChange={handleChange}
 									value={petData.description}
 								/>
 							</div>
 						</div>
 					</div>
+					<p className="mt-5">Os campos marcados com * são obrigatórios</p>
 					<button
 						type="submit"
 						className="bottom-0 mt-5 h-16 w-80 self-center rounded-2xl bg-button-yellow text-xl font-bold 
