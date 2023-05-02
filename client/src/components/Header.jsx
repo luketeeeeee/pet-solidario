@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 import {
 	ArrowRightOnRectangleIcon,
 	PlusIcon,
-	UserCircleIcon,
 } from '@heroicons/react/24/outline';
 import logo from '../assets/logo.png';
 
@@ -27,6 +26,7 @@ export function Header() {
 					<img src={logo} alt="Pet solidario" className="w-16 max-w-xs" />
 				</Link>
 				<Link
+					data-testid="pet-list-link"
 					to="/pets"
 					className="flex items-center text-button-yellow transition duration-300 ease-in-out hover:text-yellow-600"
 				>
@@ -61,6 +61,7 @@ export function Header() {
 				) : (
 					<>
 						<Link
+							data-testid="login-link"
 							to="/signin"
 							className="max-h-11 rounded-xl bg-green-400 px-5 py-2 transition duration-500 ease-in-out hover:bg-green-600"
 						>
@@ -68,6 +69,7 @@ export function Header() {
 						</Link>
 
 						<Link
+							data-testid="register-link"
 							to="/signup"
 							className="max-h-11 rounded-xl bg-button-yellow px-5 py-2 transition duration-500 ease-in-out hover:bg-yellow-600"
 						>
