@@ -1,3 +1,4 @@
+import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -53,6 +54,7 @@ export function SignIn() {
 			<main className="flex h-full items-center justify-center bg-signin-img bg-cover bg-no-repeat text-white">
 				<div className="flex h-[500px] w-[550px] justify-center">
 					<form
+						data-testid="login-form"
 						className="flex w-full flex-col justify-between rounded-3xl bg-black bg-opacity-60 p-6 text-center"
 						onSubmit={handleSubmit}
 					>
@@ -88,6 +90,7 @@ export function SignIn() {
 							</button>
 
 							<Link
+								data-testid="register-link"
 								to="/signup"
 								className="flex h-16 w-64 items-center justify-center self-center rounded-2xl bg-slate-900 text-lg text-white transition duration-500 ease-in-out hover:bg-slate-800"
 							>
