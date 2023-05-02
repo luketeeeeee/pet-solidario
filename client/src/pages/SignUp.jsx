@@ -63,6 +63,7 @@ export function SignUp() {
 			<main className="flex h-full items-center justify-end bg-signup-img bg-cover bg-no-repeat text-white">
 				<div className="mr-12 flex h-[650px] w-[600px] justify-start">
 					<form
+						data-testid="register-form"
 						className="flex w-11/12 flex-col rounded-3xl bg-black bg-opacity-60 p-6 text-center"
 						onSubmit={handleSubmit}
 					>
@@ -134,7 +135,7 @@ export function SignUp() {
 								type="submit"
 								className="mt-5 h-16 w-80 self-center rounded-2xl bg-button-yellow text-xl font-bold transition duration-500 ease-in-out hover:bg-yellow-600"
 							>
-								Cadastre-se
+								Cadastrar-se
 							</button>
 						</div>
 					</form>
