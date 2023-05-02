@@ -101,7 +101,7 @@ export function SignIn() {
 								to="/mudar-senha"
 								className="flex items-center justify-center self-center  text-lg text-white ease-in-out"
 							>
-								<u>Esqueceu a senha?</u>
+								<p className="text-xl underline">Esqueceu a senha?</p>
 							</Link>
 						</div>
 					</form>

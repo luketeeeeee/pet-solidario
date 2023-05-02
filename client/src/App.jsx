@@ -6,6 +6,7 @@ import { Home } from './pages/Home';
 import { SignIn } from './pages/SignIn';
 import { SignUp } from './pages/SignUp';
 import { PetsList } from './pages/PetsList';
+import { ResetPassword } from './pages/ResetPassword';
 import { AddPets } from './pages/AddPets';
 
 function App() {
@@ -22,12 +23,14 @@ function App() {
 						<Route path="/add-pet" element={<AddPets />} />
 						<Route path="/signup" element={<Navigate replace to="/" />} />
 						<Route path="/signin" element={<Navigate replace to="/" />} />
+						<Route path="/mudar-senha" element={<Navigate replace to="/" />} />
 					</>
 				) : (
 					<>
 						<Route path="/add-pet" element={<Navigate replace to="/" />} />
 						<Route path="/signup" element={<SignUp />} />
 						<Route path="/signin" element={<SignIn />} />
+						<Route path="/mudar-senha" element={<ResetPassword />} />
 					</>
 				)}
 			</Routes>
