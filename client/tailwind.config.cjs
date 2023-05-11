@@ -11,8 +11,9 @@ module.exports = {
 				'signup-img': "url('/src/assets/bg-signup-img.png')",
 				'signin-img': "url('/src/assets/bg-signin-img.png')",
 				'reset-password-img': "url('/src/assets/bg-reset-password.png')",
+				'addpet-img': "url('/src/assets/bg-addpet-img.png')",
 			},
 		},
 	},
-	plugins: [],
+	plugins: [require('tailwind-scrollbar')],
 };
