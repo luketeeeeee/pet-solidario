@@ -4,8 +4,8 @@ const sendEmail = async (email, subject, text) => {
     try {
         const transporter = nodemailer.createTransport({
             host: process.env.MAILER_HOST,
-            // service: process.env.MAILER_SERVICE,
-            port: process.env.MAILER_PORT,
+            service: process.env.MAILER_SERVICE,
+            port: 587,
             secure: true,
             auth: {
                 user: process.env.MAILER_USER,
@@ -22,6 +22,7 @@ const sendEmail = async (email, subject, text) => {
 
         console.log('🟢 email enviado com sucesso 🟢');
     } catch (error) {
+        console.log(error);
         console.log('🔴 email não foi enviado 🔴');
     }
 };
