@@ -8,8 +8,7 @@ const router = express.Router();
 
 router.route('/').post(async (req, res) => {
     try {
-        const { username, phoneNumber, email, password, confirmPassword } =
-            req.body;
+        const { username, phoneNumber, email, password, confirmPassword } = req.body;
 
         const { error } = validateSignUp(req.body);
 
@@ -26,16 +25,14 @@ router.route('/').post(async (req, res) => {
                 error.details[0].type === 'passwordComplexity.lowercase'
             ) {
                 return res.status(400).json({
-                    message:
-                        'A senha deve conter caracteres maiúsculos e minúsculos!',
+                    message: 'A senha deve conter caracteres maiúsculos e minúsculos!',
                     success: false,
                 });
             }
 
             if (error.details[0].type === 'passwordComplexity.symbol') {
                 return res.status(400).json({
-                    message:
-                        'A senha deve conter pelo menos um caracter especial!',
+                    message: 'A senha deve conter pelo menos um caracter especial!',
                     success: false,
                 });
             }
@@ -65,7 +62,6 @@ router.route('/').post(async (req, res) => {
             password: hashPassword,
         });
 
-        // await new UserSchema({ ...req.body, password: hashPassword }).save();
         return res.status(201).json({
             message: 'Você se cadastrou com sucesso!',
         });

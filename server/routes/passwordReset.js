@@ -40,6 +40,11 @@ router.post('/', async (req, res) => {
 
         const link = `http://localhost:5173/password-reset/${user._id}/${token.token}`;
         await sendEmail(user.email, 'Mude sua senha', link);
+
+        res.status(200).json({
+            message:
+                'Email de recuperação de senha enviado com sucesso! Não se esqueça de verificar sua caixa de spam!',
+        });
     } catch (error) {
         console.log(error);
         res.status(500).send({ message: 'something is wrong, i can feel it' });

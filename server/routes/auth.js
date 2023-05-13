@@ -28,7 +28,7 @@ router.route('/').post(async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).send({ message: 'Erro interno no servidor!' });
+        res.status(500).send({ message: 'Email ou senha inválidos!' });
     }
 });
 
