@@ -3,6 +3,7 @@ import TokenSchema from '../mongodb/models/token.js';
 import sendEmail from '../utils/sendEmail.js';
 
 import crypto from 'crypto';
+import bcrypt from 'bcrypt';
 import Joi from 'joi';
 import express from 'express';
 
@@ -38,7 +39,7 @@ router.post('/', async (req, res) => {
             });
         }
 
-        const link = `http://localhost:5173/password-reset/${user._id}/${token.token}`;
+        const link = `http://localhost:5173/mudar-senha/${user._id}/${token.token}`;
         await sendEmail(user.email, 'Mude sua senha', link);
 
         res.status(200).json({
@@ -47,7 +48,47 @@ router.post('/', async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).send({ message: 'something is wrong, i can feel it' });
+        res.status(500).json({ message: 'something is wrong, i can feel it' });
+    }
+});
+
+router.route('/:userIdParam/:tokenParam').post(async (req, res) => {
+    try {
+        const { userIdParam, tokenParam } = req.params;
+        const { password } = req.body;
+        const schema = Joi.object({ password: Joi.string().required() });
+
+        const { error } = schema.validate(password);
+        if (error) return res.status(400).json(error.details[0].message);
+
+        const user = await UserSchema.findById(userIdParam);
+        if (!user)
+            return res.status(400).json({
+                message: 'O link é inválido ou expirou',
+                success: false,
+            });
+
+        const token = await TokenSchema.findOne({
+            userId: user._id,
+            token: tokenParam,
+        });
+        if (!token)
+            return res.status(400).json({
+                message: 'O link é inválido ou expirou',
+                success: false,
+            });
+
+        const salt = await bcrypt.genSalt(Number(process.env.SALT));
+        const hashPassword = await bcrypt.hash(password, salt);
+
+        user.password = hashPassword;
+        await user.save();
+        await token.delete();
+
+        res.status(200).json({ message: 'A senha foi alterada com sucesso!' });
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: 'something is wrong, i can feel it' });
     }
 });
 

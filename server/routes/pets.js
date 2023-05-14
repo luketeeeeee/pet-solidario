@@ -50,7 +50,7 @@ router.route('/').post(async (req, res) => {
         });
     } catch (error) {
         console.log(error);
-        res.status(500).send({ message: 'something is wrong, i can feel it' });
+        res.status(500).json({ message: 'something is wrong, i can feel it' });
     }
 });
 

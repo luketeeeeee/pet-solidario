@@ -5,6 +5,7 @@ import { ArrowLeftCircleIcon } from '@heroicons/react/24/outline';
 import { toast } from 'react-hot-toast';
 
 export function ResetPassword() {
+	const [emailSent, setEmailSent] = useState(false);
 	const [formData, setFormData] = useState({
 		email: '',
 	});
@@ -65,6 +66,9 @@ export function ResetPassword() {
 							<ArrowLeftCircleIcon className="h-14 w-14" />
 						</Link>
 						<h1 className="text-3xl">Esqueceu a senha?</h1>
+						<p className="text-white">
+							Sem problemas, enviaremos as instruções para mudar a senha.
+						</p>
 
 						<div className="mt-7 flex h-full flex-col items-center justify-between text-lg text-black">
 							<input
@@ -77,15 +81,11 @@ export function ResetPassword() {
 								className="h-[70px] w-[400px] rounded-2xl px-5 placeholder:text-gray-400"
 							/>
 
-							<p className="text-white">
-								*Certifique-se de inserir um email cadastrado na plataforma
-							</p>
-
 							<button
 								type="submit"
 								className="h-16 w-64 self-center rounded-2xl bg-button-yellow text-xl font-bold transition duration-500 ease-in-out hover:bg-yellow-600"
 							>
-								Próximo
+								Mudar senha
 							</button>
 
 							<Link
