@@ -32,7 +32,11 @@ router.post('/', async (req, res) => {
         }
 
         let token = await TokenSchema.findOne({ userId: user._id });
-        if (!token) {
+        if (token) {
+            return res.status(400).json({
+                message: 'Um token de recuperação já está ativo para este usuário!',
+            });
+        } else {
             token = await TokenSchema.create({
                 userId: user._id,
                 token: crypto.randomBytes(32).toString('hex'),
@@ -40,7 +44,11 @@ router.post('/', async (req, res) => {
         }
 
         const link = `http://localhost:5173/mudar-senha/${user._id}/${token.token}`;
-        await sendEmail(user.email, 'Mude sua senha', link);
+        await sendEmail(
+            user.email,
+            'Mude sua senha',
+            `Olá, o link a seguir vai direcionar você para uma página em que será possível alterar sua senha\n ${link}`
+        );
 
         res.status(200).json({
             message:

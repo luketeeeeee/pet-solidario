@@ -5,7 +5,7 @@ import { ArrowLeftCircleIcon } from '@heroicons/react/24/outline';
 import { toast } from 'react-hot-toast';
 
 export function ResetPassword() {
-	const [emailSent, setEmailSent] = useState(false);
+	const [sendingEmail, setSendingEmail] = useState(false);
 	const [formData, setFormData] = useState({
 		email: '',
 	});
@@ -16,8 +16,10 @@ export function ResetPassword() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(formData);
+
 		if (formData) {
+			setSendingEmail(true);
+
 			try {
 				await fetch('http://localhost:8080/api/password-reset', {
 					method: 'POST',
@@ -26,7 +28,6 @@ export function ResetPassword() {
 					},
 					body: JSON.stringify(formData),
 				}).then((response) => {
-					console.log(response);
 					if (!response.ok) {
 						return response.text().then((text) => {
 							throw new String(text);
@@ -46,6 +47,8 @@ export function ResetPassword() {
 				let errorJsonFormat = JSON.parse(error);
 
 				toast.error(errorJsonFormat.message);
+			} finally {
+				setSendingEmail(false);
 			}
 		}
 	};
@@ -81,12 +84,22 @@ export function ResetPassword() {
 								className="h-[70px] w-[400px] rounded-2xl px-5 placeholder:text-gray-400"
 							/>
 
-							<button
-								type="submit"
-								className="h-16 w-64 self-center rounded-2xl bg-button-yellow text-xl font-bold transition duration-500 ease-in-out hover:bg-yellow-600"
-							>
-								Mudar senha
-							</button>
+							{sendingEmail ? (
+								<button
+									disabled
+									type="submit"
+									className="h-16 w-64 self-center rounded-2xl bg-gray-400 text-xl font-bold transition duration-500 ease-in-out"
+								>
+									Enviando...
+								</button>
+							) : (
+								<button
+									type="submit"
+									className="h-16 w-64 self-center rounded-2xl bg-button-yellow text-xl font-bold transition duration-500 ease-in-out hover:bg-yellow-600"
+								>
+									Mudar senha
+								</button>
+							)}
 
 							<Link
 								to="/signin"
