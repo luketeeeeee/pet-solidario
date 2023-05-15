@@ -39,7 +39,7 @@ router.route('/').post(async (req, res) => {
         }
 
         if (password !== confirmPassword)
-            return res.status(409).json({
+            return res.status(400).json({
                 message: 'As senhas não coincidem!',
                 success: false,
             });

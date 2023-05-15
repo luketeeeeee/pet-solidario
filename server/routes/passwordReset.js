@@ -6,6 +6,7 @@ import crypto from 'crypto';
 import bcrypt from 'bcrypt';
 import Joi from 'joi';
 import express from 'express';
+import validateNewPassword from '../utils/validateNewPassword.js';
 
 const router = express.Router();
 
@@ -63,11 +64,41 @@ router.post('/', async (req, res) => {
 router.route('/:userIdParam/:tokenParam').post(async (req, res) => {
     try {
         const { userIdParam, tokenParam } = req.params;
-        const { password } = req.body;
-        const schema = Joi.object({ password: Joi.string().required() });
+        const { newPassword, confirmNewPassword } = req.body;
 
-        const { error } = schema.validate(password);
-        if (error) return res.status(400).json(error.details[0].message);
+        if (newPassword !== confirmNewPassword) {
+            return res.status(400).json({
+                message: 'As senhas não coincidem!',
+                success: false,
+            });
+        }
+
+        const { error } = validateNewPassword(req.body);
+        if (error) {
+            if (error.details[0].type === 'passwordComplexity.numeric') {
+                return res.status(400).json({
+                    message: 'A senha deve conter pelo menos um número!',
+                    success: false,
+                });
+            }
+
+            if (
+                error.details[0].type === 'passwordComplexity.uppercase' ||
+                error.details[0].type === 'passwordComplexity.lowercase'
+            ) {
+                return res.status(400).json({
+                    message: 'A senha deve conter caracteres maiúsculos e minúsculos!',
+                    success: false,
+                });
+            }
+
+            if (error.details[0].type === 'passwordComplexity.symbol') {
+                return res.status(400).json({
+                    message: 'A senha deve conter pelo menos um caracter especial!',
+                    success: false,
+                });
+            }
+        }
 
         const user = await UserSchema.findById(userIdParam);
         if (!user)
@@ -87,7 +118,7 @@ router.route('/:userIdParam/:tokenParam').post(async (req, res) => {
             });
 
         const salt = await bcrypt.genSalt(Number(process.env.SALT));
-        const hashPassword = await bcrypt.hash(password, salt);
+        const hashPassword = await bcrypt.hash(newPassword, salt);
 
         user.password = hashPassword;
         await user.save();

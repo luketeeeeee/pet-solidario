@@ -17,7 +17,7 @@ export function ResetPassword() {
 	const handleSubmit = async (e) => {
 		e.preventDefault();
 
-		if (formData) {
+		if (formData.email) {
 			setSendingEmail(true);
 
 			try {
