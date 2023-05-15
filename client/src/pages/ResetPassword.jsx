@@ -38,7 +38,10 @@ export function ResetPassword() {
 						let successfullySendedEmail = JSON.parse(String(text));
 						toast.success(successfullySendedEmail.message, {
 							duration: 20000,
-							style: { minWidth: '500px' },
+							style: {
+								minWidth: '550px',
+								fontWeight: 'bold',
+							},
 						});
 					});
 				});

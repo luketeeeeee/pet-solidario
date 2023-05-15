@@ -1,12 +1,12 @@
 import UserSchema from '../mongodb/models/user.js';
 import TokenSchema from '../mongodb/models/token.js';
 import sendEmail from '../utils/sendEmail.js';
+import validateNewPassword from '../utils/validateNewPassword.js';
 
 import crypto from 'crypto';
 import bcrypt from 'bcrypt';
 import Joi from 'joi';
 import express from 'express';
-import validateNewPassword from '../utils/validateNewPassword.js';
 
 const router = express.Router();
 
@@ -26,8 +26,9 @@ router.post('/', async (req, res) => {
 
         const user = await UserSchema.findOne({ email: email });
         if (!user) {
-            return res.status(400).json({
-                message: 'Insira um email válido!',
+            return res.status(200).json({
+                message:
+                    'Se o email inserido estiver cadastrado na plataforma você receberá um email com instruções para trocar a senha!\n Não se esqueça de verificar sua caixa de spam!',
                 success: false,
             });
         }
@@ -53,7 +54,7 @@ router.post('/', async (req, res) => {
 
         res.status(200).json({
             message:
-                'Email de recuperação de senha enviado com sucesso! Não se esqueça de verificar sua caixa de spam!',
+                'Se o email inserido estiver cadastrado na plataforma você receberá um email com instruções para trocar a senha!\n Não se esqueça de verificar sua caixa de spam!',
         });
     } catch (error) {
         console.log(error);
@@ -65,6 +66,23 @@ router.route('/:userIdParam/:tokenParam').post(async (req, res) => {
     try {
         const { userIdParam, tokenParam } = req.params;
         const { newPassword, confirmNewPassword } = req.body;
+
+        const user = await UserSchema.findById(userIdParam);
+        if (!user)
+            return res.status(400).json({
+                message: 'O link é inválido ou expirou',
+                success: false,
+            });
+
+        const token = await TokenSchema.findOne({
+            userId: user._id,
+            token: tokenParam,
+        });
+        if (!token)
+            return res.status(400).json({
+                message: 'O link é inválido ou expirou',
+                success: false,
+            });
 
         if (newPassword !== confirmNewPassword) {
             return res.status(400).json({
@@ -100,29 +118,12 @@ router.route('/:userIdParam/:tokenParam').post(async (req, res) => {
             }
         }
 
-        const user = await UserSchema.findById(userIdParam);
-        if (!user)
-            return res.status(400).json({
-                message: 'O link é inválido ou expirou',
-                success: false,
-            });
-
-        const token = await TokenSchema.findOne({
-            userId: user._id,
-            token: tokenParam,
-        });
-        if (!token)
-            return res.status(400).json({
-                message: 'O link é inválido ou expirou',
-                success: false,
-            });
-
         const salt = await bcrypt.genSalt(Number(process.env.SALT));
         const hashPassword = await bcrypt.hash(newPassword, salt);
 
         user.password = hashPassword;
         await user.save();
-        await token.delete();
+        await token.deleteOne();
 
         res.status(200).json({ message: 'A senha foi alterada com sucesso!' });
     } catch (error) {

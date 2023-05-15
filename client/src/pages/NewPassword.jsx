@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useNavigate, useParams } from 'react-router-dom';
 
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/outline';
 import { toast } from 'react-hot-toast';
 
 export function NewPassword() {
+	const navigate = useNavigate();
 	const { userId, token } = useParams();
 
 	const [settingNewPassword, setSettingNewPassword] = useState(false);
@@ -22,11 +23,42 @@ export function NewPassword() {
 
 		if (formData.newPassword && formData.confirmNewPassword) {
 			setSettingNewPassword(true);
+			console.log(formData.newPassword, formData.confirmNewPassword);
 
 			try {
-			} catch {
-			} finally {
+				await fetch(
+					`http://localhost:8080/api/password-reset/${userId}/${token}`,
+					{
+						method: 'POST',
+						headers: {
+							'Content-Type': 'application/json',
+						},
+						body: JSON.stringify(formData),
+					}
+				).then((response) => {
+					if (!response.ok) {
+						console.log(response);
+						return response.text().then((text) => {
+							throw new String(text);
+						});
+					}
+
+					console.log(response);
+
+					return response.text().then((text) => {
+						setSettingNewPassword(false);
+
+						let successfullyChangedPassword = JSON.parse(String(text));
+						toast.success(successfullyChangedPassword.message);
+						navigate('/signin');
+					});
+				});
+			} catch (error) {
+				console.log(error);
+
 				setSettingNewPassword(false);
+				let errorJsonFormat = JSON.parse(error);
+				toast.error(errorJsonFormat.message);
 			}
 		}
 	};
@@ -55,21 +87,25 @@ export function NewPassword() {
 						<div className="mt-7 flex h-full flex-col items-center justify-between text-lg text-black">
 							<div className="flex h-[140px] flex-col justify-between">
 								<input
-									type="text"
+									type="password"
 									placeholder="Nova senha"
-									name="nova-senha"
+									name="newPassword"
 									onChange={handleChange}
 									value={formData.newPassword}
 									required
+									minLength={8}
+									maxLength={30}
 									className="h-[65px] w-[400px] rounded-2xl px-5 placeholder:text-gray-400"
 								/>
 								<input
-									type="text"
+									type="password"
 									placeholder="Confirmar nova senha"
-									name="confirmar-nova-senha"
+									name="confirmNewPassword"
 									onChange={handleChange}
 									value={formData.confirmNewPassword}
 									required
+									minLength={8}
+									maxLength={30}
 									className="h-[65px] w-[400px] rounded-2xl px-5 placeholder:text-gray-400"
 								/>
 							</div>
