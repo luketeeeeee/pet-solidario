@@ -1,0 +1,13 @@
+version: "3.1"
+
+services:
+  db:
+    container_name: petsolidario_db
+    image: mongo
+    restart: always
+    ports:
+      - 127.0.0.1:27018:27017
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: docker
+      MONGO_INITDB_ROOT_PASSWORD: pet
+      MONGO_INITDB_DATABASE: db_pet_solidario
