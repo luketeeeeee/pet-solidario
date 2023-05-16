@@ -7,7 +7,7 @@ import { toast } from 'react-hot-toast';
 export function AddPets() {
 	const navigate = useNavigate();
 
-	const user = JSON.parse(localStorage.getItem('token'));
+	const user = JSON.stringify(localStorage.getItem('token'));
 
 	const [photo, setPhoto] = useState('');
 	const [petData, setPetData] = useState({
@@ -84,6 +84,7 @@ export function AddPets() {
 			<div className="flex h-[700px] w-[800px] items-center justify-center">
 				<form
 					action=""
+					data-testid="addpet-form"
 					method="post"
 					className="flex h-auto w-full flex-col justify-between rounded-3xl bg-black bg-opacity-60 p-6 text-center"
 					autoComplete="off"
