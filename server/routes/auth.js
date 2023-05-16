@@ -12,23 +12,24 @@ router.route('/').post(async (req, res) => {
 
         const { error } = validateSignIn(req.body);
 
-        if (error) return res.status(400).send({ message: 'Email ou senha inválidos!' });
+        if (error) return res.status(400).json({ message: 'Email ou senha inválidos!' });
 
         const user = await UserSchema.findOne({ email: email });
         const validPassword = await bcrypt.compare(password, user.password);
 
         if (!user || !validPassword)
-            return res.status(401).send({ message: 'Email ou senha inválidos!' });
+            return res.status(401).json({ message: 'Email ou senha inválidos!' });
 
         const token = user.generateAuthToken();
-        res.status(200).send({
+        res.status(200).json({
             data: token,
+            userId: user._id,
             username: user.username,
             email: user.email,
         });
     } catch (error) {
         console.log(error);
-        res.status(500).send({ message: 'Erro interno no servidor!' });
+        res.status(500).json({ message: 'Email ou senha inválidos!' });
     }
 });
 

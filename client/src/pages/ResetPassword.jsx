@@ -1,14 +1,69 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/outline';
+import { toast } from 'react-hot-toast';
 
 export function ResetPassword() {
+	const [sendingEmail, setSendingEmail] = useState(false);
+	const [formData, setFormData] = useState({
+		email: '',
+	});
+
+	const handleChange = (e) => {
+		setFormData({ ...formData, [e.target.name]: e.target.value });
+	};
+
+	const handleSubmit = async (e) => {
+		e.preventDefault();
+
+		if (formData.email) {
+			setSendingEmail(true);
+
+			try {
+				await fetch('http://localhost:8080/api/password-reset', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify(formData),
+				}).then((response) => {
+					if (!response.ok) {
+						return response.text().then((text) => {
+							throw new String(text);
+						});
+					}
+
+					return response.text().then((text) => {
+						let successfullySendedEmail = JSON.parse(String(text));
+						toast.success(successfullySendedEmail.message, {
+							duration: 20000,
+							style: {
+								minWidth: '550px',
+								fontWeight: 'bold',
+							},
+						});
+					});
+				});
+			} catch (error) {
+				console.log(error);
+				let errorJsonFormat = JSON.parse(error);
+
+				toast.error(errorJsonFormat.message);
+			} finally {
+				setSendingEmail(false);
+			}
+		}
+	};
+
 	return (
 		<>
 			<main className="flex h-full items-center justify-center bg-reset-password-img bg-cover bg-no-repeat text-white">
-				<div className="flex h-[375px] w-[600px] justify-center">
-					<form className="flex w-full flex-col rounded-3xl bg-black bg-opacity-60 p-6 text-center">
+				<div className="flex h-[420px] w-[600px] justify-center">
+					<form
+						className="flex w-full flex-col rounded-3xl bg-black bg-opacity-60 p-6 text-center"
+						onSubmit={handleSubmit}
+					>
 						<Link
 							to="/signin"
 							className="h-14 w-14"
@@ -17,24 +72,37 @@ export function ResetPassword() {
 							<ArrowLeftCircleIcon className="h-14 w-14" />
 						</Link>
 						<h1 className="text-3xl">Esqueceu a senha?</h1>
+						<p className="text-white">
+							Sem problemas, enviaremos as instruções para mudar a senha.
+						</p>
 
 						<div className="mt-7 flex h-full flex-col items-center justify-between text-lg text-black">
 							<input
 								type="text"
 								placeholder="Email"
 								name="email"
-								// onChange={handleChange}
-								// value={userData.email}
+								onChange={handleChange}
+								value={formData.email}
 								required
 								className="h-[70px] w-[400px] rounded-2xl px-5 placeholder:text-gray-400"
 							/>
 
-							<button
-								type="submit"
-								className="h-16 w-64 self-center rounded-2xl bg-button-yellow text-xl font-bold transition duration-500 ease-in-out hover:bg-yellow-600"
-							>
-								Próximo
-							</button>
+							{sendingEmail ? (
+								<button
+									disabled
+									type="submit"
+									className="h-16 w-64 self-center rounded-2xl bg-gray-400 text-xl font-bold transition duration-500 ease-in-out"
+								>
+									Enviando...
+								</button>
+							) : (
+								<button
+									type="submit"
+									className="h-16 w-64 self-center rounded-2xl bg-button-yellow text-xl font-bold transition duration-500 ease-in-out hover:bg-yellow-600"
+								>
+									Mudar senha
+								</button>
+							)}
 
 							<Link
 								to="/signin"
