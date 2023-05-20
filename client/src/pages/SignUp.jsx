@@ -2,6 +2,7 @@ import React from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
+import { IMaskInput } from 'react-imask';
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/outline';
 import { toast } from 'react-hot-toast';
 
@@ -82,8 +83,10 @@ export function SignUp() {
 								required
 								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
 							/>
-							<input
-								type="text"
+
+							<IMaskInput
+								mask="(00) 0 0000-0000"
+								type="tel"
 								placeholder="Telefone"
 								name="phoneNumber"
 								onChange={handleChange}
