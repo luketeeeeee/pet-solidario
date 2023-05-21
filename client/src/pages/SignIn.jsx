@@ -2,14 +2,24 @@ import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { ArrowLeftCircleIcon } from '@heroicons/react/24/outline';
+import { IMaskInput } from 'react-imask';
+import {
+	ArrowLeftCircleIcon,
+	EyeIcon,
+	EyeSlashIcon,
+} from '@heroicons/react/24/outline';
 import { toast } from 'react-hot-toast';
 
 export function SignIn() {
+	const [passwordShow, setPasswordShow] = useState();
 	const [userData, setUserData] = useState({
 		email: '',
 		password: '',
 	});
+
+	const toggleShowPassword = () => {
+		setPasswordShow(!passwordShow);
+	};
 
 	const handleChange = (e) => {
 		setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -73,15 +83,30 @@ export function SignIn() {
 								required
 								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
 							/>
-							<input
-								type="password"
-								placeholder="Senha"
-								name="password"
-								onChange={handleChange}
-								value={userData.password}
-								required
-								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
-							/>
+							<div className="flex w-full rounded-2xl bg-white focus-within:outline focus-within:outline-1 focus-within:outline-offset-2 focus-within:outline-white">
+								<input
+									type={passwordShow ? 'text' : 'password'}
+									placeholder="Senha"
+									name="password"
+									onChange={handleChange}
+									value={userData.password}
+									minLength={8}
+									maxLength={30}
+									required
+									className="h-14 w-full rounded-2xl px-5 outline-none placeholder:text-gray-400"
+								/>
+								<button
+									className="pr-4 text-gray-800"
+									onClick={toggleShowPassword}
+									type="button"
+								>
+									{passwordShow ? (
+										<EyeSlashIcon className="h-10 w-10" />
+									) : (
+										<EyeIcon className="h-10 w-10" />
+									)}
+								</button>
+							</div>
 							<button
 								type="submit"
 								className="mt-5 h-16 w-80 self-center rounded-2xl bg-button-yellow text-xl font-bold transition duration-500 ease-in-out hover:bg-yellow-600"
