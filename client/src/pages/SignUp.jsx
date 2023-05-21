@@ -3,12 +3,17 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
 import { IMaskInput } from 'react-imask';
-import { ArrowLeftCircleIcon } from '@heroicons/react/24/outline';
+import {
+	ArrowLeftCircleIcon,
+	EyeIcon,
+	EyeSlashIcon,
+} from '@heroicons/react/24/outline';
 import { toast } from 'react-hot-toast';
 
 export function SignUp() {
 	const navigate = useNavigate();
 
+	const [passwordShow, setPasswordShow] = useState();
 	const [userData, setUserData] = useState({
 		username: '',
 		phoneNumber: '',
@@ -16,6 +21,10 @@ export function SignUp() {
 		password: '',
 		confirmPassword: '',
 	});
+
+	const toggleShowPassword = () => {
+		setPasswordShow(!passwordShow);
+	};
 
 	const handleChange = (e) => {
 		setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -105,29 +114,56 @@ export function SignUp() {
 								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
 							/>
 
-							<input
-								type="password"
-								placeholder="Senha"
-								name="password"
-								onChange={handleChange}
-								value={userData.password}
-								minLength={8}
-								maxLength={30}
-								required
-								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
-							/>
+							<div className="flex w-full rounded-2xl bg-white focus-within:outline focus-within:outline-1 focus-within:outline-offset-2 focus-within:outline-white">
+								<input
+									type={passwordShow ? 'text' : 'password'}
+									placeholder="Senha"
+									name="password"
+									onChange={handleChange}
+									value={userData.password}
+									minLength={8}
+									maxLength={30}
+									required
+									className="h-14 w-full rounded-2xl px-5 outline-none placeholder:text-gray-400"
+								/>
+								<button
+									className="pr-4 text-gray-800"
+									onClick={toggleShowPassword}
+									type="button"
+								>
+									{passwordShow ? (
+										<EyeSlashIcon className="h-10 w-10" />
+									) : (
+										<EyeIcon className="h-10 w-10" />
+									)}
+								</button>
+							</div>
 
-							<input
-								type="password"
-								placeholder="Confirmar senha"
-								name="confirmPassword"
-								onChange={handleChange}
-								value={userData.confirmPassword}
-								minLength={8}
-								maxLength={30}
-								required
-								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
-							/>
+							<div className="flex w-full rounded-2xl bg-white focus-within:outline focus-within:outline-1 focus-within:outline-offset-2 focus-within:outline-white">
+								<input
+									type={passwordShow ? 'text' : 'password'}
+									placeholder="Confirmar senha"
+									name="confirmPassword"
+									onChange={handleChange}
+									value={userData.confirmPassword}
+									minLength={8}
+									maxLength={30}
+									required
+									className="h-14 w-full rounded-2xl px-5 outline-none placeholder:text-gray-400"
+								/>
+								<button
+									className="pr-4 text-gray-800"
+									onClick={toggleShowPassword}
+									type="button"
+								>
+									{passwordShow ? (
+										<EyeSlashIcon className="h-10 w-10" />
+									) : (
+										<EyeIcon className="h-10 w-10" />
+									)}
+								</button>
+							</div>
+
 							<h2 className="text-1xl mt-5 leading-5 text-white">
 								{' '}
 								*A senha deve conter: ao menos uma letra maiúscula, uma
