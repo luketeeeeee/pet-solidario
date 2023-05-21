@@ -36,17 +36,20 @@ export function Header() {
 
 			<div className="min-w-10 flex items-center justify-between gap-x-3 text-xl font-bold text-slate-900">
 				{user ? (
-					<div className="flex w-72 justify-between">
+					<div className="flex w-[400px] justify-between">
 						<p className="flex items-center justify-center font-medium text-white">
-							Olá, {user.username}
+							Olá,&nbsp;
+							<Link className="font-bold text-button-yellow">
+								{user.username.substring(0, user.username.indexOf(' '))}
+							</Link>
 						</p>
-						<div className="flex w-[125px] justify-between">
+						<div className="flex w-[260px] justify-between">
 							<Link
 								to="/add-pet"
 								className="flex items-center justify-center rounded-2xl bg-green-600 py-3 px-3 text-white transition duration-500 ease-in-out hover:bg-green-500"
 								title="Cadastrar um pet"
 							>
-								<PlusIcon className="w-7" />
+								Cadastre um pet
 							</Link>
 
 							<button
