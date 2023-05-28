@@ -30,7 +30,7 @@ export function Header() {
 					to="/pets"
 					className="flex items-center text-button-yellow transition duration-300 ease-in-out hover:text-yellow-600"
 				>
-					<h1 className="text-xl">Pets para adoção</h1>
+					<h1 className="text-xl">Encontre um pet</h1>
 				</Link>
 			</div>
 
@@ -39,7 +39,7 @@ export function Header() {
 					<div className="flex w-[400px] justify-between">
 						<p className="flex items-center justify-center font-medium text-white">
 							Olá,&nbsp;
-							<Link className="font-bold text-button-yellow">
+							<Link className="font-bold text-button-yellow transition duration-300 ease-in-out hover:text-yellow-600">
 								{user.username.substring(0, user.username.indexOf(' '))}
 							</Link>
 						</p>
