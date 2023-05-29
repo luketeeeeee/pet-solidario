@@ -28,6 +28,8 @@ export function PetsList() {
 					},
 				});
 
+				console.log(response);
+
 				if (response.ok) {
 					const result = await response.json();
 
@@ -47,21 +49,16 @@ export function PetsList() {
 		<>
 			<Header />
 			{loading ? (
-				<div className="flex items-center justify-center">
+				<div>
 					<Loader />
 				</div>
 			) : (
-				<div className="flex flex-col items-center">
-					<h1 className="my-5 text-3xl font-extrabold text-button-yellow">
-						Todos aqui precisam de um lar
-					</h1>
-					<div className="xs:grid-cols-2 grid grid-cols-1 gap-3 px-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-						<RenderPetCards
-							data={allPets}
-							title="Nenhum pet foi adicionado ainda"
-						/>
-					</div>
-				</div>
+				<>
+					<RenderPetCards
+						data={allPets}
+						title="Nenhum pet foi adicionado ainda"
+					/>
+				</>
 			)}
 		</>
 	);

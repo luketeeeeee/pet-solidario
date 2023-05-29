@@ -4,7 +4,7 @@ import { Link } from 'react-router-dom';
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/outline';
 import { toast } from 'react-hot-toast';
 
-export function ForgotPassword() {
+export function ResetPassword() {
 	const [sendingEmail, setSendingEmail] = useState(false);
 	const [formData, setFormData] = useState({
 		email: '',

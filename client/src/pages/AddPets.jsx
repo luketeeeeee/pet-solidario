@@ -7,25 +7,16 @@ import { toast } from 'react-hot-toast';
 export function AddPets() {
 	const navigate = useNavigate();
 
-	const user = JSON.parse(localStorage.getItem('token'));
+	const user = JSON.stringify(localStorage.getItem('token'));
 
-	let ownerName = '';
-	let ownerEmail = '';
-
-	if (user !== null) {
-		ownerName = `${user.username}`;
-		ownerEmail = `${user.email}`;
-	}
-
-	const [savingPet, setSavingPet] = useState(false);
 	const [photo, setPhoto] = useState('');
 	const [petData, setPetData] = useState({
 		name: '',
 		species: '',
 		sex: '',
 		breed: '',
-		ownerName: ownerName,
-		ownerEmail: ownerEmail,
+		ownerName: user.username,
+		ownerEmail: user.email,
 		description: '',
 		adopted: false,
 	});
@@ -51,14 +42,13 @@ export function AddPets() {
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
+		console.log(petData.photo);
 
 		if (!photo) {
 			toast.error('Por favor, insira uma foto do pet!');
 		}
 
 		if (petData.name && petData.species && petData.sex && photo) {
-			setSavingPet(true);
-
 			try {
 				await fetch('http://localhost:8080/api/pets', {
 					method: 'POST',
@@ -67,6 +57,7 @@ export function AddPets() {
 					},
 					body: JSON.stringify([petData, photo]),
 				}).then((response) => {
+					console.log(response);
 					if (!response.ok) {
 						return response.text().then((text) => {
 							throw new String(text);
@@ -84,8 +75,6 @@ export function AddPets() {
 				let errorJsonFormat = JSON.parse(error);
 
 				toast.error(errorJsonFormat.message);
-			} finally {
-				setSavingPet(false);
 			}
 		}
 	};
@@ -223,23 +212,13 @@ export function AddPets() {
 						</div>
 					</div>
 					<p className="mt-5">Os campos marcados com * são obrigatórios</p>
-					{savingPet ? (
-						<button
-							type="submit"
-							className="bottom-0 mt-5 h-16 w-80 self-center rounded-2xl bg-gray-400 text-xl font-bold 
-                        text-slate-50 transition duration-500 ease-in-out"
-						>
-							Adicionando pet...
-						</button>
-					) : (
-						<button
-							type="submit"
-							className="bottom-0 mt-5 h-16 w-80 self-center rounded-2xl bg-button-yellow text-xl font-bold 
-                         text-slate-50 transition duration-500 ease-in-out hover:bg-yellow-600"
-						>
-							Adicionar pet para adoção
-						</button>
-					)}
+					<button
+						type="submit"
+						className="bottom-0 mt-5 h-16 w-80 self-center rounded-2xl bg-button-yellow text-xl font-bold 
+                        text-slate-50 transition duration-500 ease-in-out hover:bg-yellow-600"
+					>
+						Adicionar pet para adoção
+					</button>
 				</form>
 			</div>
 		</main>
