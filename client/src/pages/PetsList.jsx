@@ -15,6 +15,7 @@ const RenderPetCards = ({ data, title }) => {
 export function PetsList() {
 	const [loading, setLoading] = useState(false);
 	const [allPets, setAllPets] = useState(null);
+	const [fullBg, setFullBg] = useState(false);
 
 	useEffect(() => {
 		const fetchPets = async () => {
@@ -32,6 +33,9 @@ export function PetsList() {
 					const result = await response.json();
 
 					setAllPets(result.data.reverse());
+					if (result.data.length > 4) {
+						setFullBg(true);
+					}
 				}
 			} catch (error) {
 				alert(error);
@@ -44,25 +48,31 @@ export function PetsList() {
 	}, []);
 
 	return (
-		<>
+		<div
+			className={`bg-size-100 ${
+				fullBg ? 'h-cover' : 'h-screen'
+			} bg-pet-list-img`}
+		>
 			<Header />
-			{loading ? (
-				<div className="flex items-center justify-center">
-					<Loader />
-				</div>
-			) : (
-				<div className="flex flex-col items-center">
-					<h1 className="my-5 text-3xl font-extrabold text-button-yellow">
-						Todos aqui precisam de um lar
-					</h1>
-					<div className="xs:grid-cols-2 grid grid-cols-1 gap-3 px-7 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
-						<RenderPetCards
-							data={allPets}
-							title="Nenhum pet foi adicionado ainda"
-						/>
+			<main>
+				{loading ? (
+					<div className="flex items-center justify-center">
+						<Loader />
 					</div>
-				</div>
-			)}
-		</>
+				) : (
+					<div className="flex flex-col items-center">
+						<h1 className="my-5 text-3xl font-extrabold text-slate-900">
+							Todos aqui precisam de um lar
+						</h1>
+						<div className="xs:grid-cols-2 grid grid-cols-1 gap-3 px-7 pb-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+							<RenderPetCards
+								data={allPets}
+								title="Nenhum pet foi adicionado ainda"
+							/>
+						</div>
+					</div>
+				)}
+			</main>
+		</div>
 	);
 }

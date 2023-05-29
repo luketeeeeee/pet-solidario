@@ -12,6 +12,7 @@ module.exports = {
 				'signin-img': "url('/src/assets/bg-signin-img.png')",
 				'reset-password-img': "url('/src/assets/bg-reset-password.png')",
 				'addpet-img': "url('/src/assets/bg-addpet-img.png')",
+				'pet-list-img': "url('/src/assets/bg-petlist-img.png')",
 			},
 		},
 	},
