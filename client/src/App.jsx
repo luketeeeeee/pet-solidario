@@ -6,7 +6,7 @@ import { Home } from './pages/Home';
 import { SignIn } from './pages/SignIn';
 import { SignUp } from './pages/SignUp';
 import { PetsList } from './pages/PetsList';
-import { ResetPassword } from './pages/ResetPassword';
+import { ForgotPassword } from './pages/ForgotPassword';
 import { AddPets } from './pages/AddPets';
 import { NewPassword } from './pages/NewPassword';
 import { PageNotFound } from './pages/PageNotFound';
@@ -51,7 +51,7 @@ function App() {
 						/>
 						<Route exact path="/signup" element={<SignUp />} />
 						<Route exact path="/signin" element={<SignIn />} />
-						<Route exact path="/mudar-senha" element={<ResetPassword />} />
+						<Route exact path="/mudar-senha" element={<ForgotPassword />} />
 					</>
 				)}
 			</Routes>
