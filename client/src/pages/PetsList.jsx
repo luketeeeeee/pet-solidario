@@ -61,7 +61,7 @@ export function PetsList() {
 					</div>
 				) : (
 					<div className="flex flex-col items-center">
-						<h1 className="my-5 text-3xl font-extrabold text-slate-900">
+						<h1 className="my-5 text-3xl font-extrabold text-white">
 							Todos aqui precisam de um lar
 						</h1>
 						<div className="xs:grid-cols-2 grid grid-cols-1 gap-3 px-7 pb-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">

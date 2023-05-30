@@ -10,7 +10,7 @@ import express from 'express';
 
 const router = express.Router();
 
-router.post('/', async (req, res) => {
+router.route('/').post(async (req, res) => {
     try {
         const { email } = req.body;
         const schema = Joi.object({ email: Joi.string().email().required() });
