@@ -16,3 +16,7 @@
 5. Vá até o navegador e acesse 'http://localhost:5173', volte ao terminal e digite CTRL + C para parar a aplicação, volte a pasta raiz.
 
 6. Entre na pasta `server` e execute o camando `npm install`, aguarde a instalação, quando concluída execute o comando `npm run dev`.
+
+### MongoDB via Docker/Docker-compose
+
+1. Execute o comando `docker-compose up -d` para iniciar um container docker com uma imagem do mongodb
