@@ -23,6 +23,17 @@ router.route('/').get(async (req, res) => {
     }
 });
 
+router.route('/:petId').get(async (req, res) => {
+    try {
+        const { petId } = req.params;
+
+        const pet = await PetSchema.findById(petId);
+        res.status(200).json({ success: true, data: pet });
+    } catch (error) {
+        res.status(500).json({ sucess: false, message: error });
+    }
+});
+
 router.route('/').post(async (req, res) => {
     try {
         const [
