@@ -49,22 +49,20 @@ export function PetsList() {
 
 	return (
 		<div
-			className={`bg-size-100 ${
-				fullBg ? 'h-cover' : 'h-screen'
-			} bg-pet-list-img`}
+			className={`bg-size-100 sm:h-cover h-screen bg-pet-list-img sm:h-screen`}
 		>
 			<Header />
-			<main>
+			<main className="flex h-[85%] justify-center bg-no-repeat xl:h-[88%]">
 				{loading ? (
 					<div className="flex items-center justify-center">
 						<Loader />
 					</div>
 				) : (
 					<div className="flex flex-col items-center">
-						<h1 className="my-5 text-3xl font-extrabold text-white">
+						<h1 className="my-5 text-2xl font-extrabold text-white sm:text-3xl">
 							Todos aqui precisam de um lar
 						</h1>
-						<div className="xs:grid-cols-2 grid grid-cols-1 gap-3 px-7 pb-5 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+						<div className="xs:grid-cols-2 grid grid-cols-1 gap-3 px-7 pb-5 sm:grid-cols-2 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 2xl:grid-cols-5">
 							<RenderPetCards
 								data={allPets}
 								title="Nenhum pet foi adicionado ainda"

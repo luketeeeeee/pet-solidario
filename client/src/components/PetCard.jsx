@@ -14,14 +14,14 @@ export function PetCard({
 }) {
 	return (
 		<Link
-			className="shadow-card hover:shadow-cardhover card group group relative flex h-[500px] flex-col rounded-xl hover:cursor-pointer"
+			className="shadow-card hover:shadow-cardhover card group group relative flex h-[450px] flex-col rounded-xl hover:cursor-pointer"
 			to={`/pet-details/${_id}`}
 		>
 			<div className="h-[20px] rounded-t-xl bg-yellow-400 transition duration-700 ease-in-out group-hover:bg-yellow-600">
 				{''}
 			</div>
 			<img
-				className="h-[400px] w-full object-cover"
+				className="h-[350px] w-full object-cover"
 				src={photo}
 				alt={`Foto de ${name}`}
 			/>

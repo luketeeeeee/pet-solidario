@@ -11,6 +11,7 @@ import { AddPets } from './pages/AddPets';
 import { NewPassword } from './pages/NewPassword';
 import { PageNotFound } from './pages/PageNotFound';
 import { PetDetails } from './pages/PetDetails';
+import { AboutUs } from './pages/AboutUs';
 
 function App() {
 	const user = JSON.parse(localStorage.getItem('token'));
@@ -23,6 +24,7 @@ function App() {
 				<Route exact path="/pets" element={<PetsList />} />
 				<Route path="*" element={<PageNotFound />} />
 				<Route exact path="/pet-details/:petId" element={<PetDetails />} />
+				<Route exact path="/about-us" element={<AboutUs />} />
 				{user ? (
 					<>
 						<Route exact path="/add-pet" element={<AddPets />} />
