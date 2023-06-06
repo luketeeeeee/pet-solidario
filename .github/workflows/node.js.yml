@@ -28,14 +28,14 @@ jobs:
 
             - name: Run build server
               working-directory: server
-            - run: | 
+              run: | 
                 npm ci
                 npm test
                 npm run build --if-present
 
             - name: Run build client
               working-directory: client
-            - run: | 
+              run: | 
                 npm ci
                 npm test
                 npm run build --if-present
