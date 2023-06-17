@@ -21,7 +21,7 @@ export function ForgotPassword() {
 			setSendingEmail(true);
 
 			try {
-				await fetch('http://localhost:8080/api/password-reset', {
+				await fetch(`${import.meta.env.VITE_API_URL}/api/password-reset`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
