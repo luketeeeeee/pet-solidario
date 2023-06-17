@@ -1,43 +1,93 @@
+import React from 'react';
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { ArrowLeftCircleIcon } from '@heroicons/react/24/outline';
+import { toast } from 'react-hot-toast';
 
 export function AddPets() {
+	const navigate = useNavigate();
+
 	const user = JSON.parse(localStorage.getItem('token'));
 
+	let ownerName = '';
+	let ownerEmail = '';
+
+	if (user !== null) {
+		ownerName = `${user.username}`;
+		ownerEmail = `${user.email}`;
+	}
+
+	const [savingPet, setSavingPet] = useState(false);
+	const [photo, setPhoto] = useState('');
 	const [petData, setPetData] = useState({
 		name: '',
 		species: '',
 		sex: '',
 		breed: '',
-		ownerName: user.username,
-		ownerEmail: user.email,
+		ownerName: ownerName,
+		ownerEmail: ownerEmail,
 		description: '',
+		adopted: false,
 	});
-	const [foto, setFoto] = useState('');
 
 	const handleChange = (e) => {
 		setPetData({ ...petData, [e.target.name]: e.target.value });
 	};
 
-	const handleFotoChange = (event) => {
+	const handlePhotoChange = (event) => {
 		const file = event.target.files[0];
 		if (file) {
 			const reader = new FileReader();
 			reader.onload = function (event) {
 				console.log('Imagem lida com sucesso!');
-				setFoto(event.target.result);
+				setPhoto(event.target.result);
 			};
 
 			reader.readAsDataURL(file);
 		} else {
-			setFoto('');
+			setPhoto('');
 		}
 	};
 
 	const handleSubmit = async (e) => {
 		e.preventDefault();
-		console.log(petData);
+
+		if (!photo) {
+			toast.error('Por favor, insira uma foto do pet!');
+		}
+
+		if (petData.name && petData.species && petData.sex && photo) {
+			setSavingPet(true);
+
+			try {
+				await fetch('http://localhost:8080/api/pets', {
+					method: 'POST',
+					headers: {
+						'Content-Type': 'application/json',
+					},
+					body: JSON.stringify([petData, photo]),
+				}).then((response) => {
+					if (!response.ok) {
+						return response.text().then((text) => {
+							throw new String(text);
+						});
+					}
+
+					return response.text().then((text) => {
+						let successfullyPetRegisterMessage = JSON.parse(String(text));
+						toast.success(successfullyPetRegisterMessage.message);
+						navigate('/pets');
+					});
+				});
+			} catch (error) {
+				console.log(response);
+				let errorJsonFormat = JSON.parse(error);
+
+				toast.error(errorJsonFormat.message);
+			} finally {
+				setSavingPet(false);
+			}
+		}
 	};
 
 	return (
@@ -45,6 +95,7 @@ export function AddPets() {
 			<div className="flex h-[700px] w-[800px] items-center justify-center">
 				<form
 					action=""
+					data-testid="addpet-form"
 					method="post"
 					className="flex h-auto w-full flex-col justify-between rounded-3xl bg-black bg-opacity-60 p-6 text-center"
 					autoComplete="off"
@@ -62,31 +113,20 @@ export function AddPets() {
 								htmlFor="foto"
 								id="fotoLabel"
 								tabIndex={0}
+								className="flex aspect-video h-[420px] w-80 cursor-pointer items-center justify-center rounded-2xl 
+                                bg-[#ddd] bg-contain bg-center bg-no-repeat text-[#aaa]"
 								style={{
-									width: '320px',
-									height: '320px',
-									aspectRatio: '16/12',
-									background: '#ddd',
-									display: 'flex',
-									alignItems: 'center',
-									justifyContent: 'center',
-									color: '#aaa',
 									border: '3px dashed',
-									cursor: 'pointer',
-									backgroundImage: `url(${foto})`,
-									backgroundSize: 'contain',
-									backgroundRepeat: 'no-repeat',
-									backgroundPosition: 'center',
-									borderRadius: '20px',
+									backgroundImage: `url(${photo})`,
 								}}
 							>
-								<span>Escolher foto do pet</span>
+								{photo ? <span></span> : <span>*Escolher foto do pet</span>}
 								<input
 									type="file"
 									name="foto"
 									id="foto"
 									className="hidden"
-									onChange={handleFotoChange}
+									onChange={handlePhotoChange}
 								/>
 							</label>
 						</div>
@@ -98,8 +138,9 @@ export function AddPets() {
 									id="name"
 									onChange={handleChange}
 									value={petData.name}
-									placeholder="Nome do pet"
+									placeholder="*Nome do pet"
 									className="h-14 w-full rounded-2xl px-5 text-black"
+									required
 								/>
 							</div>
 							<div className="mb-3">
@@ -109,8 +150,9 @@ export function AddPets() {
 									id="species"
 									onChange={handleChange}
 									value={petData.species}
-									placeholder="Espécie: cachorro, gato, passáro..."
+									placeholder="*Espécie: cachorro, gato, passáro..."
 									className="h-14 w-full rounded-2xl px-5 text-black"
+									required
 								/>
 							</div>
 							<div className="mb-3">
@@ -125,7 +167,7 @@ export function AddPets() {
 								/>
 							</div>
 							<div className="mb-3">
-								<p className="text-xl">Sexo</p>
+								<p className="text-xl">Sexo*</p>
 								<div className="flex">
 									<input
 										type="radio"
@@ -134,6 +176,7 @@ export function AddPets() {
 										value="male"
 										className="w-9"
 										onClick={handleChange}
+										required
 									/>
 									<label htmlFor="male" className="my-o mx-auto">
 										Macho
@@ -145,6 +188,7 @@ export function AddPets() {
 										value="female"
 										className="w-9"
 										onClick={handleChange}
+										required
 									/>
 									<label htmlFor="female" className="my-o mx-auto">
 										Fêmea
@@ -156,6 +200,7 @@ export function AddPets() {
 										value="none"
 										className="w-9"
 										onClick={handleChange}
+										required
 									/>
 									<label htmlFor="none" className="my-o mr-0 ml-auto">
 										Não informar
@@ -163,25 +208,38 @@ export function AddPets() {
 								</div>
 							</div>
 							<div>
-								<p>Descreva as caracteríticas do seu pet</p>
+								{/* <p>Descreva as caracteríticas do seu pet</p> */}
 								<textarea
 									name="description"
 									id="description"
+									placeholder="Descreva as características do seu pet"
 									cols="30"
 									rows="10"
-									className="h-32 w-full resize-none rounded-2xl p-3 text-base text-black scrollbar-none"
+									className="h-32 w-full resize-none rounded-2xl px-4 py-3 text-base text-black scrollbar-none"
 									onChange={handleChange}
 									value={petData.description}
 								/>
 							</div>
 						</div>
 					</div>
-					<button
-						type="submit"
-						className="bottom-0 mt-3 h-16 w-80 self-center rounded-2xl bg-button-yellow text-xl font-bold text-slate-50 transition duration-500 ease-in-out hover:bg-yellow-600"
-					>
-						Adicionar pet para adoção
-					</button>
+					<p className="mt-5">Os campos marcados com * são obrigatórios</p>
+					{savingPet ? (
+						<button
+							type="submit"
+							className="bottom-0 mt-5 h-16 w-80 self-center rounded-2xl bg-gray-400 text-xl font-bold 
+                        text-slate-50 transition duration-500 ease-in-out"
+						>
+							Adicionando pet...
+						</button>
+					) : (
+						<button
+							type="submit"
+							className="bottom-0 mt-5 h-16 w-80 self-center rounded-2xl bg-button-yellow text-xl font-bold 
+                         text-slate-50 transition duration-500 ease-in-out hover:bg-yellow-600"
+						>
+							Adicionar pet para adoção
+						</button>
+					)}
 				</form>
 			</div>
 		</main>

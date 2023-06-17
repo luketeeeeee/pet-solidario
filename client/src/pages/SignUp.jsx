@@ -1,12 +1,19 @@
+import React from 'react';
 import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 
-import { ArrowLeftCircleIcon } from '@heroicons/react/24/outline';
+import { IMaskInput } from 'react-imask';
+import {
+	ArrowLeftCircleIcon,
+	EyeIcon,
+	EyeSlashIcon,
+} from '@heroicons/react/24/outline';
 import { toast } from 'react-hot-toast';
 
 export function SignUp() {
 	const navigate = useNavigate();
 
+	const [passwordShow, setPasswordShow] = useState();
 	const [userData, setUserData] = useState({
 		username: '',
 		phoneNumber: '',
@@ -14,6 +21,10 @@ export function SignUp() {
 		password: '',
 		confirmPassword: '',
 	});
+
+	const toggleShowPassword = () => {
+		setPasswordShow(!passwordShow);
+	};
 
 	const handleChange = (e) => {
 		setUserData({ ...userData, [e.target.name]: e.target.value });
@@ -62,6 +73,7 @@ export function SignUp() {
 			<main className="flex h-full items-center justify-end bg-signup-img bg-cover bg-no-repeat text-white">
 				<div className="mr-12 flex h-[650px] w-[600px] justify-start">
 					<form
+						data-testid="register-form"
 						className="flex w-11/12 flex-col rounded-3xl bg-black bg-opacity-60 p-6 text-center"
 						onSubmit={handleSubmit}
 					>
@@ -80,8 +92,10 @@ export function SignUp() {
 								required
 								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
 							/>
-							<input
-								type="text"
+
+							<IMaskInput
+								mask="(00) 0 0000-0000"
+								type="tel"
 								placeholder="Telefone"
 								name="phoneNumber"
 								onChange={handleChange}
@@ -100,29 +114,56 @@ export function SignUp() {
 								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
 							/>
 
-							<input
-								type="password"
-								placeholder="Senha"
-								name="password"
-								onChange={handleChange}
-								value={userData.password}
-								minLength={8}
-								maxLength={30}
-								required
-								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
-							/>
+							<div className="flex w-full rounded-2xl bg-white focus-within:outline focus-within:outline-1 focus-within:outline-offset-2 focus-within:outline-white">
+								<input
+									type={passwordShow ? 'text' : 'password'}
+									placeholder="Senha"
+									name="password"
+									onChange={handleChange}
+									value={userData.password}
+									minLength={8}
+									maxLength={30}
+									required
+									className="h-14 w-full rounded-2xl px-5 outline-none placeholder:text-gray-400"
+								/>
+								<button
+									className="pr-4 text-gray-800"
+									onClick={toggleShowPassword}
+									type="button"
+								>
+									{passwordShow ? (
+										<EyeSlashIcon className="h-10 w-10" />
+									) : (
+										<EyeIcon className="h-10 w-10" />
+									)}
+								</button>
+							</div>
 
-							<input
-								type="password"
-								placeholder="Confirmar senha"
-								name="confirmPassword"
-								onChange={handleChange}
-								value={userData.confirmPassword}
-								minLength={8}
-								maxLength={30}
-								required
-								className="h-14 rounded-2xl px-5 placeholder:text-gray-400"
-							/>
+							<div className="flex w-full rounded-2xl bg-white focus-within:outline focus-within:outline-1 focus-within:outline-offset-2 focus-within:outline-white">
+								<input
+									type={passwordShow ? 'text' : 'password'}
+									placeholder="Confirmar senha"
+									name="confirmPassword"
+									onChange={handleChange}
+									value={userData.confirmPassword}
+									minLength={8}
+									maxLength={30}
+									required
+									className="h-14 w-full rounded-2xl px-5 outline-none placeholder:text-gray-400"
+								/>
+								<button
+									className="pr-4 text-gray-800"
+									onClick={toggleShowPassword}
+									type="button"
+								>
+									{passwordShow ? (
+										<EyeSlashIcon className="h-10 w-10" />
+									) : (
+										<EyeIcon className="h-10 w-10" />
+									)}
+								</button>
+							</div>
+
 							<h2 className="text-1xl mt-5 leading-5 text-white">
 								{' '}
 								*A senha deve conter: ao menos uma letra maiúscula, uma
@@ -133,7 +174,7 @@ export function SignUp() {
 								type="submit"
 								className="mt-5 h-16 w-80 self-center rounded-2xl bg-button-yellow text-xl font-bold transition duration-500 ease-in-out hover:bg-yellow-600"
 							>
-								Cadastre-se
+								Cadastrar-se
 							</button>
 						</div>
 					</form>
