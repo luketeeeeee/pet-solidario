@@ -17,7 +17,7 @@ export function Header() {
 
 	return (
 		<header className="flex h-[15%] w-full flex-wrap justify-between bg-slate-900 px-16 py-3 text-white xl:h-[12%]">
-			<div className="flex w-72 justify-between">
+			<div className="flex w-[420px] justify-between">
 				<Link
 					to="/"
 					title="Logo do Pet Solidário"
@@ -31,6 +31,12 @@ export function Header() {
 					className="flex items-center text-button-yellow transition duration-300 ease-in-out hover:text-yellow-600"
 				>
 					<h1 className="text-xl">Encontre um pet</h1>
+				</Link>
+				<Link
+					to="/about-us"
+					className="flex items-center text-button-yellow transition duration-300 ease-in-out hover:text-yellow-600"
+				>
+					<h1 className="text-xl">Sobre nós</h1>
 				</Link>
 			</div>
 
