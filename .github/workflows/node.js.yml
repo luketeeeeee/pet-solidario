@@ -30,6 +30,7 @@ jobs:
               working-directory: server
               run: | 
                 npm ci
+                npm install
                 npm test
                 npm run build --if-present
 
@@ -37,6 +38,7 @@ jobs:
               working-directory: client
               run: | 
                 npm ci
+                npm install
                 npm test
                 npm run build --if-present
             
