@@ -41,7 +41,7 @@ export function SignUp() {
 			userData.confirmPassword
 		) {
 			try {
-				await fetch('http://localhost:8080/api/users', {
+				await fetch(`${import.meta.env.VITE_API_URL}/api/users`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',

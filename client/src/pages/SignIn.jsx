@@ -1,8 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-
-import { IMaskInput } from 'react-imask';
 import {
 	ArrowLeftCircleIcon,
 	EyeIcon,
@@ -30,7 +28,7 @@ export function SignIn() {
 
 		if (userData.email && userData.password) {
 			try {
-				await fetch('http://localhost:8080/api/auth', {
+				await fetch(`${import.meta.env.VITE_API_URL}/api/auth`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',

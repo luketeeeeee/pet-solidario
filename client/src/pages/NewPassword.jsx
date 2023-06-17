@@ -27,7 +27,9 @@ export function NewPassword() {
 
 			try {
 				await fetch(
-					`http://localhost:8080/api/password-reset/${userId}/${token}`,
+					`${
+						import.meta.env.VITE_API_URL
+					}/api/password-reset/${userId}/${token}`,
 					{
 						method: 'POST',
 						headers: {
