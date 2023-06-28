@@ -12,6 +12,7 @@ import { NewPassword } from './pages/NewPassword';
 import { PageNotFound } from './pages/PageNotFound';
 import { PetDetails } from './pages/PetDetails';
 import { AboutUs } from './pages/AboutUs';
+import { SendEmail } from './pages/SendEmail';
 
 function App() {
 	const user = JSON.parse(localStorage.getItem('token'));
@@ -27,6 +28,7 @@ function App() {
 				<Route exact path="/about-us" element={<AboutUs />} />
 				{user ? (
 					<>
+						<Route exact path="/send-email/:petId" element={<SendEmail />} />
 						<Route exact path="/add-pet" element={<AddPets />} />
 						<Route exact path="/signup" element={<Navigate replace to="/" />} />
 						<Route exact path="/signin" element={<Navigate replace to="/" />} />
@@ -43,6 +45,11 @@ function App() {
 					</>
 				) : (
 					<>
+						<Route
+							exact
+							path="/send-email"
+							element={<Navigate replace to="/" />}
+						/>
 						<Route
 							exact
 							path="/mudar-senha/:userId/:token"
