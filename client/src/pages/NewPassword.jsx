@@ -27,7 +27,9 @@ export function NewPassword() {
 
 			try {
 				await fetch(
-					`http://localhost:8080/api/password-reset/${userId}/${token}`,
+					`${
+						import.meta.env.VITE_API_URL
+					}/api/password-reset/${userId}/${token}`,
 					{
 						method: 'POST',
 						headers: {
@@ -68,6 +70,7 @@ export function NewPassword() {
 			<main className="flex h-full items-center justify-center bg-reset-password-img bg-cover bg-no-repeat text-white">
 				<div className="flex h-[500px] w-[600px] justify-center">
 					<form
+						data-testid="NewPassword-form"
 						className="flex w-full flex-col justify-between rounded-3xl bg-black bg-opacity-60 p-6 text-center"
 						onSubmit={handleSubmit}
 					>

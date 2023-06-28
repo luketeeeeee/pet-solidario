@@ -6,7 +6,7 @@ import { Header } from '../components/Header';
 import Loader from '../components/Loader';
 import { toast } from 'react-hot-toast';
 
-export function PetDetails() {
+export function SendEmail() {
 	const user = JSON.parse(localStorage.getItem('token'));
 
 	const { petId } = useParams();
@@ -54,56 +54,45 @@ export function PetDetails() {
 							<Loader />
 						</div>
 					) : (
-						<div className="flex h-5/6 w-3/5 rounded-3xl bg-black bg-opacity-60 p-6">
+						<div className="flex h-4/6 w-2/6 flex-col rounded-3xl bg-black bg-opacity-60 p-6 text-white">
 							<Link
-								to="/pets"
-								className="h-14 w-14 text-white"
+								to={`/pet-details/${petId}`}
+								className="h-14 w-14"
 								title="Voltar à página inicial"
 							>
 								<ArrowLeftCircleIcon className="h-14 w-14" />
 							</Link>
-
-							<div className="flex w-1/2 flex-col justify-between pb-10 pt-20 text-2xl font-bold text-white">
-								<div className="flex h-3/5 flex-col">
-									<div>
-										<h1>Nome: {petDetails.name}</h1>
-										<h2>Espécie: {petDetails.species}</h2>
-										<h2>Raça: {petDetails.breed}</h2>
-										{petDetails.sex === 'male' ? (
-											<h2>Sexo: Macho</h2>
-										) : petDetails.sex === 'female' ? (
-											<h2>Sexo: Fêmea</h2>
-										) : (
-											<h2>Sexo: Não informado</h2>
-										)}
-									</div>
-
-									<p className="mt-4 text-lg">{petDetails.description}</p>
-								</div>
-
-								{user ? (
-									<Link
-										to={`/send-email/${petId}`}
-										className="flex h-16 w-72 items-center justify-center rounded-3xl bg-button-yellow text-black transition duration-500 ease-in-out hover:bg-yellow-600"
-									>
-										Adotar
-									</Link>
-								) : (
+							<div className="flex flex-col items-center">
+								<p className="w-[85%] text-center text-xl">
+									Informe seu interesse em{' '}
+									<strong className="text-button-yellow">
+										{petDetails.name}
+									</strong>{' '}
+									por meio de um email que será enviado para{' '}
+									<strong className="text-button-yellow">
+										{petDetails.ownerName}
+									</strong>
+								</p>
+								<form
+									className="flex flex-col items-center"
+									// onSubmit={handleSubmit}
+								>
+									<textarea
+										name="emailText"
+										id="emailText"
+										placeholder="Escreva o email aqui"
+										rows="10"
+										className="mt-5 w-[500px] resize-none rounded-2xl px-4 py-3 text-base text-black scrollbar-none"
+										// onChange={handleChange}
+									/>
 									<button
-										onClick={() => toast.error('Realize login')}
-										className="h-16 w-72 self-start rounded-3xl bg-button-yellow text-black transition duration-500 ease-in-out hover:bg-yellow-600"
+										type="submit"
+										className="bottom-0 mt-5 h-16 w-80 self-center rounded-2xl bg-button-yellow text-xl font-bold 
+                         text-slate-50 transition duration-500 ease-in-out hover:bg-yellow-600"
 									>
-										Adotar
+										Adicionar pet para adoção
 									</button>
-								)}
-							</div>
-
-							<div className="flex w-1/2 items-center py-10">
-								<img
-									className="flex h-full w-full rounded-2xl object-cover"
-									src={petDetails.photo}
-									alt={petDetails.name}
-								/>
+								</form>
 							</div>
 						</div>
 					)}

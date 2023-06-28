@@ -60,7 +60,7 @@ export function AddPets() {
 			setSavingPet(true);
 
 			try {
-				await fetch('http://localhost:8080/api/pets', {
+				await fetch(`${import.meta.env.VITE_API_URL}/api/pets`, {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json',
