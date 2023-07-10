@@ -1,9 +1,28 @@
 ## pet-solidario
 
--   Projeto da disciplina Engenharia de Software
--   O Pet Solidário é uma aplicação web para adoção de pets.
+1. Projeto da disciplina Engenharia de Software
+2. O Pet Solidário é uma aplicação web para adoção de pets.
+
+- ### Motivação
+Esse projeto foi iniciado durante a disciplina de Engenharia de Software, ministrada pela professora Angélica Felix. A ideia surgiu a partir da observação de problemas recorrentes em nosso dia a dia.
+
+Muitas cidades sofrem com um grande número de animais em situação de rua, o que muitas vezes causa transtornos em diversos outros âmbitos, como na saúde e no trânsito. Um outro problema que pode ser notado é o fato de que muitas pessoas acabam não tendo condições de dar todos os cuidados necessários para seus animais de estimação e muitas vezes acabam não encontrando alguém que tenha interesse em adotá-los.
+
+O Pet Solidário foi pensado para ajudar a reduzir esses problemas, tentando encontrar um lar para animais desamparados, servindo como uma linha de comunicação entre aqueles que querem adotar e os que desejam colocar um animal para a adoção.
+
+- ### Tecnologias
+Para esse projeto foram usadas as seguintes tecnologias web:
+1. Framework frontend: React
+2. Framework backend: Express
+3. Linguagens: JavaScript e TypeScript
+4. Estilização: TailwindCSS
+5. Banco de dados: MongoDB
+
+Além de diversas outras bibliotecas que foram usadas para funcionalidades mais específicas.
 
 ### Passos para a instalação
+
+Observações: o arquivo `server/docker-compose up -d` serve apenas como um exemplo, as configurações definidas nele podem ser (e é aconselhável que sejam) alteradas.
 
 1. Para copiar o repositório use o comando `git clone https://github.com/luketeeeeee/pet-solidario.git` ou baixe o repositório para a sua máquina.
 
