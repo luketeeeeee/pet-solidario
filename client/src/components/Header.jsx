@@ -94,21 +94,21 @@ export function Header() {
 							</>
 						) : (
 							<>
-								<li className="flex h-11 items-center">
+								<li className="flex items-center md:h-11">
 									<Link
 										data-testid="login-link"
 										to="/signin"
-										className="max-h-11 rounded-xl px-5 py-2 text-base text-green-400 transition duration-500 ease-in-out md:bg-green-400 md:text-white md:hover:bg-green-600"
+										className="max-h-11 rounded-xl text-base text-green-400 transition duration-500 ease-in-out md:bg-green-400 md:px-5 md:py-2 md:text-white md:hover:bg-green-600"
 									>
 										Login
 									</Link>
 								</li>
 
-								<li className="flex h-11 items-center">
+								<li className="flex items-center md:h-11">
 									<Link
 										data-testid="register-link"
 										to="/signup"
-										className="max-h-11 rounded-xl px-5 py-2 text-base text-green-400 transition duration-500 ease-in-out md:bg-button-yellow md:text-white md:hover:bg-yellow-600"
+										className="max-h-11 rounded-xl text-base text-green-400 transition duration-500 ease-in-out md:bg-button-yellow md:px-5 md:py-2 md:text-white md:hover:bg-yellow-600"
 									>
 										Cadastre-se
 									</Link>
