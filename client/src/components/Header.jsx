@@ -22,7 +22,7 @@ export function Header() {
 	};
 
 	return (
-		<header className="flex min-h-[10%] w-full flex-wrap justify-between bg-slate-900 px-5 py-3 text-white md:px-8 xl:min-h-[12%]">
+		<header className="flex min-h-[10%] w-full flex-wrap justify-between bg-slate-900 px-5 py-3 text-white md:px-8">
 			<div className="flex w-full items-center justify-between">
 				<Link
 					to="/"

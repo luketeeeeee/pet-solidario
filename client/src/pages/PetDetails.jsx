@@ -46,7 +46,7 @@ export function PetDetails() {
 
 	if (petDetails !== null) {
 		return (
-			<div className="bg-size-100 h-screen bg-pet-list-img">
+			<div className="h-screen bg-pet-list-img">
 				<Header />
 				<main className="flex h-[88%] flex-col items-center justify-center">
 					{loading ? (
@@ -112,7 +112,7 @@ export function PetDetails() {
 		);
 	} else {
 		return (
-			<div className="bg-size-100 h-screen bg-pet-list-img">
+			<div className="h-screen bg-pet-list-img">
 				<Header />
 				<main className="flex h-[88%] flex-col items-center justify-center">
 					<div className="flex items-center justify-center">

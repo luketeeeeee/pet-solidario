@@ -6,7 +6,20 @@
     font-family: 'Lexend', sans-serif !important;
 }
 
-.bg-size-100 {
+:root {
+  background-color: rgb(209, 209, 209);
+}
+
+body {
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  place-items: center;
+  min-width: 320px;
+  min-height: 100vh;
+}
+
+/* .bg-size-100 {
     background-size: cover;
     background-repeat: no-repeat;
-}
+} */
