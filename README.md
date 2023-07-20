@@ -11,12 +11,15 @@ Muitas cidades sofrem com um grande número de animais em situação de rua, o q
 O Pet Solidário foi pensado para ajudar a reduzir esses problemas, tentando encontrar um lar para animais desamparados, servindo como uma linha de comunicação entre aqueles que querem adotar e os que desejam colocar um animal para a adoção.
 
 - ### Tecnologias
-Para esse projeto foram usadas as seguintes tecnologias web:
-1. Framework frontend: React
-2. Framework backend: Express
-3. Linguagens: JavaScript e TypeScript
-4. Estilização: TailwindCSS
-5. Banco de dados: MongoDB
+Muitas tecnologias e conceitos foram utilizados no desenvolvimento do Pet Solidário.
+
+No frontend a principal tecnologia utilizada foi a biblioteca React, aplicada na estruturação da interface do usuário, juntamente com o TailwindCSS para a estilização e responsividade (ainda em desenvolvimento). 
+
+Já no backend o Express foi o framework escolhido para o desenvolvimento da API da aplicação (é possível notar que a organização de pastas e arquivos dessa parte do projeto não se encontra na sua forma ideal, mas uma atualização está sendo desenvolvida para resolver esse problema)
+
+O JWT foi o método escolhido para realizar a funcionalidade de autenticação do usuário no sistema.
+
+Um outro ponto que vale destacar em relação a parte de infraestrutura foi a escolha do banco de dados MongoDB, por conta da familiaridade da equipe com essa tecnologia. Vale ressaltar que duas diferentes instâncias do Mongo são utilizadas nesse projeto, uma delas é usada localmente em ambiente de desenvolvimento, iniciada com o auxílio do Docker, já a outra corresponde ao ambiente de produção e é alocada através do Atlas.
 
 Além de diversas outras bibliotecas que foram usadas para funcionalidades mais específicas.
 
