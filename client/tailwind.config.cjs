@@ -9,7 +9,7 @@ module.exports = {
 		},
 		extend: {
 			colors: {
-				'button-yellow': '#FFD350',
+				'button-yellow': '#FDBD00',
 			},
 			backgroundImage: {
 				'home-img': "url('/src/assets/bg-home-img.png')",

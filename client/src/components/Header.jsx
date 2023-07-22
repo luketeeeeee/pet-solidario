@@ -37,10 +37,10 @@ export function Header() {
 
 				<div
 					className={`absolute left-0 ${
-						isMenuOnScreen ? `top-[10%]` : `top-[-100%]`
+						isMenuOnScreen ? `top-[8%]` : `top-[-100%]`
 					} min-h-[10%] w-full bg-slate-900 pb-0 md:static md:flex md:w-[600px] md:justify-end`}
 				>
-					<ul className="flex h-40 flex-col items-center gap-3 md:h-auto md:w-full md:flex-row md:justify-between md:gap-0">
+					<ul className="flex h-40 flex-col items-center justify-between py-4 md:h-auto md:w-full md:flex-row md:justify-between md:gap-0 md:py-0">
 						<li className="flex items-center md:h-11">
 							<Link
 								data-testid="pet-list-link"

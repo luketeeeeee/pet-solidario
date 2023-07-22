@@ -1,11 +1,6 @@
 import React from 'react';
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import {
-	ArrowLeftCircleIcon,
-	EyeIcon,
-	EyeSlashIcon,
-} from '@heroicons/react/24/outline';
 import { toast } from 'react-hot-toast';
 
 export function SignIn() {
@@ -39,7 +34,7 @@ export function SignIn() {
 					}
 
 					return response.text().then((text) => {
-						let successfullyUserLoginMessage = JSON.parse(String(text));
+						// let successfullyUserLoginMessage = JSON.parse(String(text));
 						localStorage.setItem('token', text);
 						window.location = '/';
 					});
@@ -54,11 +49,11 @@ export function SignIn() {
 
 	return (
 		<>
-			<main className="flex h-full items-center justify-center text-white">
-				<div className="flex h-[420px] w-[320px] justify-center">
+			<main className="flex h-full items-center justify-center">
+				<div className="flex h-[400px] w-[320px] justify-center">
 					<form
 						data-testid="login-form"
-						className="flex w-full flex-col justify-between rounded-xl py-5 px-3 text-center"
+						className="flex w-full flex-col justify-between rounded-xl px-5 text-center"
 						onSubmit={handleSubmit}
 					>
 						<h1 className="flex flex-col text-start text-2xl font-bold text-slate-900">
@@ -68,7 +63,7 @@ export function SignIn() {
 							</Link>{' '}
 						</h1>
 
-						<div className="flex h-[210px] flex-col justify-between text-slate-900">
+						<div className="flex h-[230px] flex-col justify-between text-slate-900">
 							<div className="flex w-full flex-col">
 								<label className="text-start font-bold">Email</label>
 								<input
