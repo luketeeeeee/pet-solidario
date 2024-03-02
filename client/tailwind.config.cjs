@@ -1,10 +1,15 @@
 /** @type {import('tailwindcss').Config} */
+const defaultTheme = require('tailwindcss/defaultTheme');
 module.exports = {
 	content: ['./index.html', './src/**/*.{js,ts,jsx,tsx}'],
 	theme: {
+		screens: {
+			xs: '400px', // rsm = really small | @media (min-width: 400px)
+			...defaultTheme.screens,
+		},
 		extend: {
 			colors: {
-				'button-yellow': '#FFD350',
+				'button-yellow': '#FDBD00',
 			},
 			backgroundImage: {
 				'home-img': "url('/src/assets/bg-home-img.png')",

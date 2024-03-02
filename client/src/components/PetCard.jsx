@@ -14,7 +14,7 @@ export function PetCard({
 }) {
 	return (
 		<Link
-			className="shadow-card hover:shadow-cardhover card group group relative flex h-[450px] flex-col rounded-xl hover:cursor-pointer"
+			className="shadow-card hover:shadow-cardhover card group flex h-[450px] flex-col rounded-xl hover:cursor-pointer"
 			to={`/pet-details/${_id}`}
 		>
 			<div className="h-[20px] rounded-t-xl bg-yellow-400 transition duration-700 ease-in-out group-hover:bg-yellow-600">
